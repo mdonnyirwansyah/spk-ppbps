@@ -19,10 +19,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('account')->name('user-')->group(function () {
         Route::get('profile-information', function () {
-            return view('app.user.profile-information');
+            return view('app.account.profile-information');
         })->name('profile-information');
         Route::get('password', function () {
-            return view('app.user.password');
+            return view('app.account.password');
         })->name('password');
     });
 });
