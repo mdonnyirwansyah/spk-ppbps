@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
 
-    Route::prefix('account')->name('user-')->group(function () {
+    Route::prefix('account')->name('account.')->group(function () {
         Route::get('profile-information', function () {
             return view('app.account.profile-information');
         })->name('profile-information');
-        Route::get('password', function () {
-            return view('app.account.password');
-        })->name('password');
+        Route::get('update-password', function () {
+            return view('app.account.update-password');
+        })->name('update-password');
     });
 });

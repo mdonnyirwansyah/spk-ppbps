@@ -34,10 +34,10 @@
           <div class="card-body">
             <ul class="nav nav-pills flex-column">
               <li class="nav-item">
-                <a href="{{ route('user-profile-information') }}" class="nav-link active">Informasi Profil</a>
+                <a href="{{ route('account.profile-information') }}" class="nav-link active">Informasi Profil</a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('user-password') }}" class="nav-link text-dark">Update Password</a>
+                <a href="{{ route('account.update-password') }}" class="nav-link text-dark">Update Password</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

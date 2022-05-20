@@ -15,7 +15,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
       <div class="dropdown-title">Selamat Datang, {{ Auth::user()->name }}</div>
-      <a href="{{ route('user-profile-information') }}" class="dropdown-item has-icon">
+      <a href="{{ route('account.profile-information') }}" class="dropdown-item has-icon">
         <i class="far fa-user"></i> Akun
       </a>
       <div class="dropdown-divider"></div>
