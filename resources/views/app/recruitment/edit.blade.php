@@ -1,17 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kategori Buku')
+@section('title', 'Edit Tema Rekrutmen')
 
 @push('javascript')
 <script>
     function printErrorMsg (msg) {
         $.each( msg, function ( key, value ) {
             $('#'+key).addClass('is-invalid');
-            $('#thumbnail-input').addClass('is-invalid');
             $('.'+key+'_err').text(value);
             $('#'+key).change(function () {
                 $('#'+key).removeClass('is-invalid');
-                $('#thumbnail-input').removeClass('is-invalid');
                 $('#'+key).addClass('is-valid');
             } );
         });
@@ -38,7 +36,7 @@
 
                         async function redirect() {
                         let promise = new Promise(function(resolve, reject) {
-                            setTimeout(function() { resolve('{{ route("kategori.index") }}'); }, 3000);
+                            setTimeout(function() { resolve('{{ route("recruitment.index") }}'); }, 3000);
                         });
                         window.location.href = await promise;
                         }
@@ -46,6 +44,7 @@
                         redirect();
                     }else{
                         printErrorMsg(response.error);
+                        $('#btn').attr('disabled', false);
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -61,19 +60,19 @@
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="{{ route('kategori.index') }}" class="btn btn-icon">
+            <a href="{{ route('recruitment.index') }}" class="btn btn-icon">
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
-        <h1>Edit Kategori Buku</h1>
+        <h1>Edit Tema Rekrutmen</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </div>
             <div class="breadcrumb-item">
-                <a href="{{ route('kategori.index') }}">Kategori Buku</a>
+                <a href="{{ route('recruitment.index') }}">Tema Rekrutmen</a>
             </div>
-            <div class="breadcrumb-item">Edit Kategori Buku</div>
+            <div class="breadcrumb-item">Edit Tema Rekrutmen</div>
         </div>
     </div>
 
@@ -82,9 +81,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('kategori.update', $kategori) }}" id="form-action" enctype="multipart/form-data">
+                        <form action="{{ route('recruitment.update', $recruitment) }}" id="form-action" enctype="multipart/form-data">
                             @method('PUT')
-                            @include('app.kategori.partials.form')
+                            @include('app.recruitment.partials.form')
                         </form>
                     </div>
                 </div>

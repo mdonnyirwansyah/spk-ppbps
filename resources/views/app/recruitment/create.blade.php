@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Kategori Buku')
+@section('title', 'Tambah Tema Rekrutmen')
 
 @push('javascript')
 <script>
@@ -36,7 +36,7 @@
 
                         async function redirect() {
                         let promise = new Promise(function(resolve, reject) {
-                            setTimeout(function() { resolve('{{ route("kategori.index") }}'); }, 3000);
+                            setTimeout(function() { resolve('{{ route("recruitment.index") }}'); }, 3000);
                         });
                         window.location.href = await promise;
                         }
@@ -60,19 +60,19 @@
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="{{ route('kategori.index') }}" class="btn btn-icon">
+            <a href="{{ route('recruitment.index') }}" class="btn btn-icon">
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
-        <h1>Tambah Kategori Buku</h1>
+        <h1>Tambah Tema Rekrutmen</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </div>
             <div class="breadcrumb-item">
-                <a href="{{ route('kategori.index') }}">Kategori Buku</a>
+                <a href="{{ route('recruitment.index') }}">Tema Rekrutmen</a>
             </div>
-            <div class="breadcrumb-item">Tambah Kategori</div>
+            <div class="breadcrumb-item">Tambah Tema Rekrutmen</div>
         </div>
     </div>
 
@@ -81,8 +81,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('kategori.store') }}" id="form-action" enctype="multipart/form-data">
-                            @include('app.kategori.partials.form')
+                        <form action="{{ route('recruitment.store') }}" id="form-action" enctype="multipart/form-data">
+                            @include('app.recruitment.partials.form')
                         </form>
                     </div>
                 </div>

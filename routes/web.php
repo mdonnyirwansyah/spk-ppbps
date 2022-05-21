@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RecruitmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
+
+    Route::resource('recruitment', RecruitmentController::class)->except('show');
 
     Route::prefix('account')->name('account.')->group(function () {
         Route::get('profile-information', function () {

@@ -17,7 +17,7 @@
                     },
                     success: function (response) {
                         if (response.success) {
-                            $('#kategori-table').DataTable().draw();
+                            $('#recruitment-table').DataTable().draw();
                             toastr.success(response.success, 'Selamat,');
                         } else {
                             swal(response.failed);
