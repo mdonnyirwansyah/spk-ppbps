@@ -67,7 +67,7 @@ class RecruitmentDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->searchable(false)->title('No')->width(50),
             Column::make('title')->title('Judul'),
-            Column::computed('action')->title('Aksi')->width(75),
+            Column::computed('action')->title('Aksi')->width(75)
         ];
     }
 

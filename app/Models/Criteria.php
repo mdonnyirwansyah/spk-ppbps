@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Recruitment extends Model
+class Criteria extends Model
 {
     use HasFactory;
 
-    protected $table = 'recruitments';
+    protected $table = 'criterias';
 
     protected $guarded = [];
 
-    public function criterias()
+    public function recruitment()
     {
-        return $this->hasMany(Criteria::class);
+        return $this->belongsTo(Recruitment::class);
     }
 }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\DataTables\RecruitmentDataTable;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class RecruitmentController extends Controller
 {
@@ -49,9 +49,9 @@ class RecruitmentController extends Controller
             $recruitment->save();
 
             return response()->json(['success' => 'Data baru berhasil ditambah!']);
+        } else {
+            return response()->json(['error' => $validator->errors()]);
         }
-
-        return response()->json(['error' => $validator->errors()]);
     }
 
     /**
@@ -84,9 +84,9 @@ class RecruitmentController extends Controller
             $recruitment->save();
 
             return response()->json(['success' => 'Data berhasil diperbarui!']);
+        } else {
+            return response()->json(['error' => $validator->errors()]);
         }
-
-        return response()->json(['error' => $validator->errors()]);
     }
 
     /**

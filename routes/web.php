@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecruitmentController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
 
-    Route::resource('recruitment', RecruitmentController::class)->except('show');
+    Route::prefix('recruitment')->name('recruitment.')->group(function () {
+        Route::get('', [RecruitmentController::class, 'index'])->name('index');
+        Route::get('create', [RecruitmentController::class, 'create'])->name('create');
+        Route::post('', [RecruitmentController::class, 'store'])->name('store');
+        Route::get('edit/{recruitment:slug}', [RecruitmentController::class, 'edit'])->name('edit');
+        Route::put('{recruitment:slug}', [RecruitmentController::class, 'update'])->name('update');
+        Route::delete('{recruitment:slug}', [RecruitmentController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('criteria')->name('criteria.')->group(function () {
+        Route::get('', [CriteriaController::class, 'index'])->name('index');
+        Route::get('create', [CriteriaController::class, 'create'])->name('create');
+        Route::post('', [CriteriaController::class, 'store'])->name('store');
+        Route::get('edit/{criteria:slug}', [CriteriaController::class, 'edit'])->name('edit');
+        Route::put('{criteria:slug}', [CriteriaController::class, 'update'])->name('update');
+        Route::delete('{criteria:slug}', [CriteriaController::class, 'destroy'])->name('destroy');
+    });
 
     Route::prefix('account')->name('account.')->group(function () {
         Route::get('profile-information', function () {
