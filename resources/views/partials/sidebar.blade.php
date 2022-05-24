@@ -12,12 +12,12 @@
       </a>
     </li>
 
-    <li class="dropdown {{ request()->routeIs('recruitment.*') || request()->routeIs('criteria.*') ? 'active' : '' }}">
+    <li class="dropdown {{ request()->routeIs('recruitment.*') || request()->routeIs('criteria.*') || request()->routeIs('sub-criteria.*') ? 'active' : '' }}">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-database"></i> <span>Data Master</span></a>
         <ul class="dropdown-menu">
           <li class="dropdown {{ request()->routeIs('recruitment.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('recruitment.index') }}">Tema Rekrutmen</a></li>
           <li class="dropdown {{ request()->routeIs('criteria.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('criteria.index') }}">Kriteria</a></li>
-          <li class="dropdown"><a class="nav-link" href="#">Sub-Kriteria</a></li>
+          <li class="dropdown {{ request()->routeIs('sub-criteria.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('sub-criteria.index') }}">Sub-Kriteria</a></li>
         </ul>
     </li>
 

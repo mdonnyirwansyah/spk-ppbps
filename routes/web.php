@@ -3,6 +3,7 @@
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\SubCriteriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{criteria:slug}', [CriteriaController::class, 'edit'])->name('edit');
         Route::put('{criteria:slug}', [CriteriaController::class, 'update'])->name('update');
         Route::delete('{criteria:slug}', [CriteriaController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('sub-criteria')->name('sub-criteria.')->group(function () {
+        Route::get('', [SubCriteriaController::class, 'index'])->name('index');
+        Route::get('create', [SubCriteriaController::class, 'create'])->name('create');
+        Route::post('', [SubCriteriaController::class, 'store'])->name('store');
+        Route::get('edit/{sub_criteria:slug}', [SubCriteriaController::class, 'edit'])->name('edit');
+        Route::put('{sub_criteria:slug}', [SubCriteriaController::class, 'update'])->name('update');
+        Route::delete('{sub_criteria:slug}', [SubCriteriaController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('account')->name('account.')->group(function () {

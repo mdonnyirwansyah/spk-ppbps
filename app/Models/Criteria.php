@@ -17,4 +17,9 @@ class Criteria extends Model
     {
         return $this->belongsTo(Recruitment::class);
     }
+
+    public function sub_criterias()
+    {
+        return $this->hasMany(SubCriteria::class);
+    }
 }
