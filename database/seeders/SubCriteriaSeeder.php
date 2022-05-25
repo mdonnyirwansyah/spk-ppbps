@@ -16,11 +16,11 @@ class SubCriteriaSeeder extends Seeder
     public function run()
     {
         $sub_criteria = collect([
-            ['criteria_id' => 1, 'name' => '19-24', 'rating' => 'Sangat Tinggi', 'weight' => 1],
-            ['criteria_id' => 1, 'name' => '25-30', 'rating' => 'Tinggi', 'weight' => 2],
+            ['criteria_id' => 1, 'name' => '19-24', 'rating' => 'Sangat Rendah', 'weight' => 1],
+            ['criteria_id' => 1, 'name' => '25-30', 'rating' => 'Rendah', 'weight' => 2],
             ['criteria_id' => 1, 'name' => '31-36', 'rating' => 'Cukup', 'weight' => 3],
-            ['criteria_id' => 1, 'name' => '37-42', 'rating' => 'Rendah', 'weight' => 4],
-            ['criteria_id' => 1, 'name' => '43-48', 'rating' => 'Sangat Rendah', 'weight' => 5]
+            ['criteria_id' => 1, 'name' => '37-42', 'rating' => 'Tinggi', 'weight' => 4],
+            ['criteria_id' => 1, 'name' => '43-48', 'rating' => 'Sangat Tinggi', 'weight' => 5]
         ]);
 
         $sub_criteria->each( function ($item) {

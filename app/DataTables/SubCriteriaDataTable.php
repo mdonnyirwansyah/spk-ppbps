@@ -3,7 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\SubCriteria;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
@@ -29,10 +28,10 @@ class SubCriteriaDataTable extends DataTable
             })
             ->addColumn('action', function ($data) {
                 return '
-                    <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('criteria.edit', $data).'" class="btn btn-icon">
+                    <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('sub-criteria.edit', $data).'" class="btn btn-icon">
                         <i class="fas fa-pen text-info"></i>
                     </a>
-                    <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$data->id.')" id="delete-'.$data->id.'" delete-route="'.route('criteria.destroy', $data).'" class="btn btn-icon">
+                    <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$data->id.')" id="delete-'.$data->id.'" delete-route="'.route('sub-criteria.destroy', $data).'" class="btn btn-icon">
                         <i class="fas fa-trash text-danger"></i>
                     </button>
                 ';
@@ -48,7 +47,7 @@ class SubCriteriaDataTable extends DataTable
      */
     public function query(SubCriteria $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('criteria_id', 'ASC');
     }
 
     /**
@@ -62,7 +61,7 @@ class SubCriteriaDataTable extends DataTable
                     ->setTableId('subcriteria-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy([1, 'ASC']);
+                    ->orderBy([4, 'ASC']);
     }
 
     /**

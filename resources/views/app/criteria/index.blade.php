@@ -3,8 +3,51 @@
 @section('title', 'Kriteria')
 
 @push('javascript')
-  {!! $dataTable->scripts() !!}
-  @include('app.criteria.actions')
+@include('app.criteria.actions')
+
+<script>
+    $(document).ready( function() {
+        $('.filter').change(function (e) {
+            criteria.draw();
+            e.preventDefault();
+        });
+
+        var criteria = $('#criteria-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('criteria.get-data') }}",
+                type: "POST",
+                data: function (d) {
+                    d.recruitment = $('#recruitment').val();
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            },
+            columns: [
+                {
+                    data: 'DT_RowIndex',
+                    width: 50,
+                    orderable: false,
+                    searchable: false
+                },
+                {data: 'name', name: 'name'},
+                {data: 'weight', name: 'weight'},
+                {
+                    data: 'action',
+                    name: 'action',
+                    width: 75,
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            order: [
+                [ 2, 'asc' ]
+            ]
+        });
+    });
+</script>
 @endpush
 
 @section('content')
@@ -22,11 +65,38 @@
     <div class="card">
       <div class="card-body">
         <div class="col-12">
-          <div class="section-header-button mb-3">
-            <a href="{{ route('criteria.create') }}" class="btn btn-primary">Tambah</a>
+          <div class="section-header-button d-flex flex-column">
+            <form class="form-inline" action="{{ route('criteria.create') }}" method="post">
+                @csrf
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-primary" type="submit">Tambah</button>
+                    </div>
+                    <select class="custom-select filter @error('recruitment') is-invalid @enderror" name="recruitment" id="recruitment">
+                        <option value="" selected>Pilih Rekrutmen</option>
+                        @foreach ($recruitment as $item)
+                        <option value="{{ $item->id }}" >{{ $item->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('recruitment')
+                        <span class="invalid-feedback" role="alert">
+                            <small>{{ $message }}</small>
+                        </span>
+                    @enderror
+                </div>
+            </form>
           </div>
           <hr>
-          {!! $dataTable->table(['class' => 'table table-bordered table-striped dt-responsive nowrap', 'cellpadding' => '0', 'style' => 'width: 100%']) !!}
+            <table id="criteria-table" class="table table-bordered table-striped dt-responsive nowrap">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Bobot</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
       </div>
     </div>

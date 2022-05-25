@@ -87,7 +87,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('sub-criteria.update', $sub-criteria) }}" id="form-action" enctype="multipart/form-data">
+                        <form action="{{ route('sub-criteria.update', $subCriteria) }}" id="form-action" enctype="multipart/form-data">
                             @method('PUT')
                             @include('app.sub-criteria.partials.form')
                         </form>

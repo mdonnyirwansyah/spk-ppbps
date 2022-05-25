@@ -1,16 +1,16 @@
 <div class="form-group row mb-4">
     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="criteria">Kriteria</label>
     <div class="col-sm-12 col-md-7">
-      <select class="form-control select2" style="width: 100%" name="criteria" id="criteria">
-        @isset($sub_criteria)
-        @if ($sub_criteria->criteria_id === null)
+      <select class="form-control" style="width: 100%" name="criteria" id="criteria">
+        @isset($subCriteria)
+        @if ($subCriteria->criteria_id === null)
             <option value="" selected>Pilih Kriteria</option>
         @endif
         @else
         <option value="" selected>Pilih Kriteria</option>
         @endisset
         @foreach ($criteria as $item)
-        <option value="{{ $item->id }}" @isset($sub_criteria) @if ($sub_criteria->criteria_id == $item->id) selected @endif @endisset>{{ $item->title }}</option>
+        <option value="{{ $item->id }}" @isset($subCriteria) @if ($subCriteria->criteria_id == $item->id) selected @endif @endisset>{{ $item->name }}</option>
         @endforeach
       </select>
       <small class="invalid-feedback criteria_err"></small>
@@ -20,7 +20,7 @@
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="name">Nama</label>
   <div class="col-sm-12 col-md-7">
-      <input type="text" class="form-control" name="name" id="name" @isset($sub_criteria) value="{{ $sub_criteria->name }}" @endisset />
+      <input type="text" class="form-control" name="name" id="name" @isset($subCriteria) value="{{ $subCriteria->name }}" @endisset />
       <small class="invalid-feedback name_err"></small>
   </div>
 </div>

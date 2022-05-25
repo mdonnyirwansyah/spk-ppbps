@@ -26,6 +26,11 @@ class CriteriaDataTable extends DataTable
                 return '-';
             }
         })
+        ->addColumn('weight', function ($data) {
+            $percentage = $data->weight * 100;
+
+            return $percentage.'%';
+        })
         ->addColumn('action', function ($data) {
             return '
                 <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('criteria.edit', $data).'" class="btn btn-icon">
@@ -47,7 +52,7 @@ class CriteriaDataTable extends DataTable
      */
     public function query(Criteria $model)
     {
-        return $model->newQuery();
+        return $model->orderBy('recruitment_id', 'ASC');
     }
 
     /**
@@ -61,7 +66,7 @@ class CriteriaDataTable extends DataTable
                     ->setTableId('criteria-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy([1, 'ASC']);
+                    ->orderBy([3, 'ASC']);
     }
 
     /**
@@ -75,7 +80,7 @@ class CriteriaDataTable extends DataTable
             Column::make('DT_RowIndex')->searchable(false)->title('No')->width(50),
             Column::computed('recruitment')->title('Tema Rekrutmen'),
             Column::make('name')->title('Nama'),
-            Column::make('weight')->title('Bobot'),
+            Column::computed('weight')->title('Bobot'),
             Column::computed('action')->title('Aksi')->width(75)
         ];
     }

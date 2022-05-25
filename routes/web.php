@@ -31,11 +31,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('criteria')->name('criteria.')->group(function () {
         Route::get('', [CriteriaController::class, 'index'])->name('index');
-        Route::get('create', [CriteriaController::class, 'create'])->name('create');
+        Route::post('create', [CriteriaController::class, 'create'])->name('create');
         Route::post('', [CriteriaController::class, 'store'])->name('store');
         Route::get('edit/{criteria:slug}', [CriteriaController::class, 'edit'])->name('edit');
         Route::put('{criteria:slug}', [CriteriaController::class, 'update'])->name('update');
         Route::delete('{criteria:slug}', [CriteriaController::class, 'destroy'])->name('destroy');
+        Route::post('get-data', [CriteriaController::class, 'getData'])->name('get-data');
     });
 
     Route::prefix('sub-criteria')->name('sub-criteria.')->group(function () {

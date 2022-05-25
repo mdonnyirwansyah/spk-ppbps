@@ -1,20 +1,14 @@
 <div class="form-group row mb-4">
-    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="recruitment">Tema Rekrutmen</label>
-    <div class="col-sm-12 col-md-7">
-      <select class="form-control select2" style="width: 100%" name="recruitment" id="recruitment">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="recruitment">Tema Recruitment</label>
+  <div class="col-sm-12 col-md-7">
+    <select class="form-control" style="width: 100%" name="recruitment" id="recruitment" readonly>
         @isset($criteria)
-        @if ($criteria->recruitment_id === null)
-            <option value="" selected>Pilih Tema Rekrutmen</option>
-        @endif
+            <option value="{{ $criteria->recruitment_id }}" selected>{{ $criteria->recruitment->title }}</option>
         @else
-        <option value="" selected>Pilih Tema Rekrutmen</option>
+        <option value="{{ $recruitment->id }}" selected>{{ $recruitment->title }}</option>
         @endisset
-        @foreach ($recruitment as $item)
-        <option value="{{ $item->id }}" @isset($criteria) @if ($criteria->recruitment_id == $item->id) selected @endif @endisset>{{ $item->title }}</option>
-        @endforeach
-      </select>
-      <small class="invalid-feedback recruitment_err"></small>
-    </div>
+    </select>
+  </div>
 </div>
 
 <div class="form-group row mb-4">
