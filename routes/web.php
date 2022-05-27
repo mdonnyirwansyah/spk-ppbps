@@ -41,11 +41,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('sub-criteria')->name('sub-criteria.')->group(function () {
         Route::get('', [SubCriteriaController::class, 'index'])->name('index');
-        Route::get('create', [SubCriteriaController::class, 'create'])->name('create');
+        Route::post('create', [SubCriteriaController::class, 'create'])->name('create');
         Route::post('', [SubCriteriaController::class, 'store'])->name('store');
         Route::get('edit/{sub_criteria:slug}', [SubCriteriaController::class, 'edit'])->name('edit');
         Route::put('{sub_criteria:slug}', [SubCriteriaController::class, 'update'])->name('update');
         Route::delete('{sub_criteria:slug}', [SubCriteriaController::class, 'destroy'])->name('destroy');
+        Route::post('get-data', [SubCriteriaController::class, 'getData'])->name('get-data');
+        Route::post('get-criteria', [SubCriteriaController::class, 'getCriteria'])->name('get-criteria');
     });
 
     Route::prefix('account')->name('account.')->group(function () {
