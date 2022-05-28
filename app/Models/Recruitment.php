@@ -17,4 +17,9 @@ class Recruitment extends Model
     {
         return $this->hasMany(Criteria::class);
     }
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
+    }
 }

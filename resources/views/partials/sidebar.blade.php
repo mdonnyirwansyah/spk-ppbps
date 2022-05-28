@@ -21,8 +21,8 @@
         </ul>
     </li>
 
-    <li class="">
-      <a class="nav-link" href="#">
+    <li class="{{ request()->routeIs('candidate.*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('candidate.index') }}">
         <i class="fas fa-users"></i> <span>Kandidat</span>
       </a>
     </li>

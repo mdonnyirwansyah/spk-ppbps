@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecruitmentController;
@@ -48,6 +49,16 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('{sub_criteria:slug}', [SubCriteriaController::class, 'destroy'])->name('destroy');
         Route::post('get-data', [SubCriteriaController::class, 'getData'])->name('get-data');
         Route::post('get-criteria', [SubCriteriaController::class, 'getCriteria'])->name('get-criteria');
+    });
+
+    Route::prefix('candidate')->name('candidate.')->group(function () {
+        Route::get('', [CandidateController::class, 'index'])->name('index');
+        Route::post('create', [CandidateController::class, 'create'])->name('create');
+        Route::post('', [CandidateController::class, 'store'])->name('store');
+        Route::get('edit/{candidate:slug}', [CandidateController::class, 'edit'])->name('edit');
+        Route::put('{candidate:slug}', [CandidateController::class, 'update'])->name('update');
+        Route::delete('{candidate:slug}', [CandidateController::class, 'destroy'])->name('destroy');
+        Route::post('get-data', [CandidateController::class, 'getData'])->name('get-data');
     });
 
     Route::prefix('account')->name('account.')->group(function () {
