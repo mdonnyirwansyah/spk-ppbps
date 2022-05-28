@@ -43,12 +43,12 @@
             <option value="Rendah" class="@if ($subCriteria->rating == "Rendah") d-none @endif" @if ($subCriteria->rating == "Rendah") selected @endif>Rendah</option>
             <option value="Sangat Rendah" class="@if ($subCriteria->rating == "Sangat Rendah") d-none @endif" @if ($subCriteria->rating == "Sangat Rendah") selected @endif>Sangat Rendah</option>
         @else
-        <option value="" selected>Pilih Rating</option>
-        <option value="Sangat Tinggi">Sangat Tinggi</option>
-        <option value="Tinggi">Tinggi</option>
-        <option value="Cukup">Cukup</option>
-        <option value="Rendah">Rendah</option>
-        <option value="Sangat Rendah">Sangat Rendah</option>
+            <option value="" selected>Pilih Rating</option>
+            <option value="Sangat Tinggi">Sangat Tinggi</option>
+            <option value="Tinggi">Tinggi</option>
+            <option value="Cukup">Cukup</option>
+            <option value="Rendah">Rendah</option>
+            <option value="Sangat Rendah">Sangat Rendah</option>
         @endisset
       </select>
       <small class="invalid-feedback rating_err"></small>

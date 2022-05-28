@@ -5,7 +5,7 @@
         @isset($criteria)
             <option value="{{ $criteria->recruitment_id }}" selected>{{ $criteria->recruitment->title }}</option>
         @else
-        <option value="{{ $recruitment->id }}" selected>{{ $recruitment->title }}</option>
+            <option value="{{ $recruitment->id }}" selected>{{ $recruitment->title }}</option>
         @endisset
     </select>
   </div>
@@ -16,6 +16,14 @@
   <div class="col-sm-12 col-md-7">
       <input type="text" class="form-control" name="name" id="name" @isset($criteria) value="{{ $criteria->name }}" @endisset />
       <small class="invalid-feedback name_err"></small>
+  </div>
+</div>
+
+<div class="form-group row mb-4">
+  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="type">Jenis</label>
+  <div class="col-sm-12 col-md-7">
+      <input type="text" class="form-control" name="type" id="type" @isset($criteria) value="{{ $criteria->type }}" @endisset />
+      <small class="invalid-feedback type_err"></small>
   </div>
 </div>
 

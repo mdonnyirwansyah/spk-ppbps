@@ -16,17 +16,18 @@ class CriteriaSeeder extends Seeder
     public function run()
     {
         $criteria = collect([
-            ['recruitment_id' => 4, 'name' => 'Usia', 'weight' => 0.10],
-            ['recruitment_id' => 4, 'name' => 'Pendidikan', 'weight' => 0.10],
-            ['recruitment_id' => 4, 'name' => 'Pengalaman', 'weight' => 0.20],
-            ['recruitment_id' => 4, 'name' => 'Tes Teknikal', 'weight' => 0.30],
-            ['recruitment_id' => 4, 'name' => 'Wawancara', 'weight' => 0.30]
+            ['recruitment_id' => 4, 'name' => 'Usia', 'type' => 'Cost', 'weight' => 0.10],
+            ['recruitment_id' => 4, 'name' => 'Pendidikan', 'type' => 'Benefit', 'weight' => 0.10],
+            ['recruitment_id' => 4, 'name' => 'Pengalaman', 'type' => 'Benefit', 'weight' => 0.20],
+            ['recruitment_id' => 4, 'name' => 'Tes Teknikal', 'type' => 'Benefit', 'weight' => 0.30],
+            ['recruitment_id' => 4, 'name' => 'Wawancara', 'type' => 'Benefit', 'weight' => 0.30]
         ]);
 
         $criteria->each( function ($item) {
             Criteria::create([
                 'recruitment_id' => $item['recruitment_id'],
                 'name' => $item['name'],
+                'type' => $item['type'],
                 'weight' => $item['weight'],
                 'slug' => Str::slug($item['name'].'-'.$item['recruitment_id'])
             ]);

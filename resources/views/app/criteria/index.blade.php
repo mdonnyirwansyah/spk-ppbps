@@ -33,6 +33,7 @@
                     searchable: false
                 },
                 {data: 'name', name: 'name'},
+                {data: 'type', name: 'type'},
                 {data: 'weight', name: 'weight'},
                 {
                     data: 'action',
@@ -43,7 +44,7 @@
                 }
             ],
             order: [
-                [ 2, 'asc' ]
+                [ 3, 'asc' ]
             ]
         });
     });
@@ -92,6 +93,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Jenis</th>
                         <th>Bobot</th>
                         <th>Aksi</th>
                     </tr>

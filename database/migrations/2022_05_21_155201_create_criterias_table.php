@@ -17,6 +17,7 @@ class CreateCriteriasTable extends Migration
             $table->id();
             $table->foreignId('recruitment_id')->nullable()->constrained('recruitments', 'id')->onUpdate('cascade')->onDelete('restrict');
             $table->string('name');
+            $table->enum('type', ['Cost', 'Benefit']);
             $table->float('weight');
             $table->string('slug');
             $table->timestamps();

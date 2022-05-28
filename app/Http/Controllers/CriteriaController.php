@@ -69,6 +69,7 @@ class CriteriaController extends Controller
                     $criteria = new Criteria();
                     $criteria->recruitment_id = $request->recruitment;
                     $criteria->name = $request->name;
+                    $criteria->type = $request->type;
                     $criteria->weight = floatval($request->weight);
                     $criteria->slug = $slug;
                     $criteria->save();
@@ -121,6 +122,7 @@ class CriteriaController extends Controller
                 } else {
                     $criteria->recruitment_id = $request->recruitment;
                     $criteria->name = $request->name;
+                    $criteria->type = $request->type;
                     $criteria->weight = floatval($request->weight);
                     $criteria->slug = $slug;
                     $criteria->save();
