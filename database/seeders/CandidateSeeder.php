@@ -16,18 +16,18 @@ class CandidateSeeder extends Seeder
     public function run()
     {
         $candidate = collect([
-            ['id' => 1, 'recruitment_id' => 4, 'name' => 'Irwansyah'],
-            ['id' => 2, 'recruitment_id' => 4, 'name' => 'Aby'],
-            ['id' => 3, 'recruitment_id' => 4, 'name' => 'Yuda'],
-            ['id' => 4, 'recruitment_id' => 4, 'name' => 'Anggara Putra'],
-            ['id' => 5, 'recruitment_id' => 4, 'name' => 'Dion']
+            ['recruitment_id' => 4, 'name' => 'Irwansyah'],
+            ['recruitment_id' => 4, 'name' => 'Aby'],
+            ['recruitment_id' => 4, 'name' => 'Yuda'],
+            ['recruitment_id' => 4, 'name' => 'Anggara Putra'],
+            ['recruitment_id' => 4, 'name' => 'Dion']
         ]);
 
         $candidate->each( function ($item) {
             Candidate::create([
                 'recruitment_id' => $item['recruitment_id'],
                 'name' => $item['name'],
-                'slug' => Str::slug($item['name'].'-'.$item['id'])
+                'slug' => Str::slug($item['name'])
             ]);
         });
     }
