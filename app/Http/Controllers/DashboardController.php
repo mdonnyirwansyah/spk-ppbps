@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recruitment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,6 +16,9 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('app.dashboard');
+        $totalRecruitment = Recruitment::count();
+        $recruitment = Recruitment::orderBy('id', 'DESC')->take(3)->get();
+
+        return view('app.dashboard', compact( 'totalRecruitment', 'recruitment'));
     }
 }
