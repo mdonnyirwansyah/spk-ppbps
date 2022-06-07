@@ -17,4 +17,9 @@ class SubCriteria extends Model
     {
         return $this->belongsTo(Criteria::class);
     }
+
+    public function candidates()
+    {
+        return $this->belongsToMany(Candidate::class);
+    }
 }

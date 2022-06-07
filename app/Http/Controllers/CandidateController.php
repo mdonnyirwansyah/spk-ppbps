@@ -143,6 +143,9 @@ class CandidateController extends Controller
         ->addIndexColumn()
         ->addColumn('action', function ($data) {
             return '
+                <a data-toggle="tooltip" data-placement="top" title="Penilaian" href="'.route('candidate.edit', $data).'" class="btn btn-icon">
+                    <i class="fas fa-file text-warning"></i>
+                </a>
                 <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('candidate.edit', $data).'" class="btn btn-icon">
                     <i class="fas fa-pen text-info"></i>
                 </a>

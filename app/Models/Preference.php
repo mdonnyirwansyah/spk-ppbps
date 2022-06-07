@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Candidate extends Model
+class Preference extends Model
 {
     use HasFactory;
 
-    protected $table = 'candidates';
+    protected $table = 'preferences';
 
     protected $guarded = [];
 
-    public function recruitment()
+    public function candidate()
     {
-        return $this->belongsTo(Recruitment::class);
+        return $this->belongsTo(Candidate::class);
     }
 
     public function sub_criterias()
     {
-        return $this->belongsToMany(SubCriterias::class);
+        return $this->belongsToMany(SubCriteria::class)->withPivot(['jumlah']);
     }
 }
