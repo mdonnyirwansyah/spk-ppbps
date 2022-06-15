@@ -20,7 +20,6 @@ class RecruitmentSeeder extends Seeder
             'Petugas Pemetaan SP2020',
             'Petugas Pemetaan Wilkerstat ST2023',
             'Petugas Pendata Lapangan SP2020 Lanjutan',
-            'Petugas Pengolahan Peta Digital Hasil Pemetaan Wilkerstat 2023'
         ]);
 
         $recruitment->each( function ($item) {

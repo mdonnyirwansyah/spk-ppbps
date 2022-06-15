@@ -16,11 +16,10 @@ class CriteriaSeeder extends Seeder
     public function run()
     {
         $criteria = collect([
-            ['recruitment_id' => 4, 'name' => 'Usia', 'type' => 'Cost', 'weight' => 0.10],
+            ['recruitment_id' => 4, 'name' => 'Usia', 'type' => 'Cost', 'weight' => 0.15],
             ['recruitment_id' => 4, 'name' => 'Pendidikan', 'type' => 'Benefit', 'weight' => 0.10],
-            ['recruitment_id' => 4, 'name' => 'Pengalaman', 'type' => 'Benefit', 'weight' => 0.20],
-            ['recruitment_id' => 4, 'name' => 'Tes Teknikal', 'type' => 'Benefit', 'weight' => 0.30],
-            ['recruitment_id' => 4, 'name' => 'Wawancara', 'type' => 'Benefit', 'weight' => 0.30]
+            ['recruitment_id' => 4, 'name' => 'Pengalaman', 'type' => 'Benefit', 'weight' => 0.35],
+            ['recruitment_id' => 4, 'name' => 'Pra-Test', 'type' => 'Benefit', 'weight' => 0.40],
         ]);
 
         $criteria->each( function ($item) {

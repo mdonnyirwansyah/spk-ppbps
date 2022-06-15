@@ -20,6 +20,6 @@ class Preference extends Model
 
     public function sub_criterias()
     {
-        return $this->belongsToMany(SubCriteria::class)->withPivot(['jumlah']);
+        return $this->belongsToMany(SubCriteria::class);
     }
 }

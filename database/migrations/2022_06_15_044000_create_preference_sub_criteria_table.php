@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePreferencesSubCriteriasTable extends Migration
+class CreatePreferenceSubCriteriaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePreferencesSubCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('preferences_sub_criterias', function (Blueprint $table) {
+        Schema::create('preference_sub_criteria', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('candidate_id')->constrained('candidates', 'id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('preference_id')->constrained('preferences', 'id')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('sub_criteria_id')->constrained('sub_criterias', 'id')->onUpdate('cascade')->onDelete('restrict');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreatePreferencesSubCriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preferences_sub_criterias');
+        Schema::dropIfExists('preference_sub_criteria');
     }
 }

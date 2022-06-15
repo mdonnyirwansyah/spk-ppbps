@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Preference;
+use App\Models\Recruitment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PreferenceController extends Controller
 {
@@ -14,7 +17,9 @@ class PreferenceController extends Controller
      */
     public function index()
     {
-        //
+        $recruitment = Recruitment::all();
+
+        return view('app.preference.index', compact('recruitment'));
     }
 
     /**
@@ -35,7 +40,26 @@ class PreferenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'sub_criterias' => 'required|array',
+            "sub_criterias.*"  => "required|string|distinct|min:1",
+        ]);
+
+        if ($validator->passes()) {
+            DB::transaction(function() use ($request) {
+                $preference = new Preference();
+                $preference->candidate_id = $request->candidate_id;
+                $preference->save();
+
+                if ($preference) {
+                    $preference->sub_criterias()->sync($request->sub_criterias);
+                }
+            });
+
+            return response()->json(['success' => 'Data baru berhasil ditambah!']);
+        } else {
+            return response()->json(['error' => $validator->errors()]);
+        }
     }
 
     /**

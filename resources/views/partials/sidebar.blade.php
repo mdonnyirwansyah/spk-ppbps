@@ -27,8 +27,8 @@
       </a>
     </li>
 
-    <li class="">
-      <a class="nav-link" href="#">
+    <li class="{{ request()->routeIs('transformation.*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('transformation.index') }}">
         <i class="fas fa-sync"></i> <span>Transformasi Data</span>
       </a>
     </li>

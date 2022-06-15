@@ -18,8 +18,8 @@ class Candidate extends Model
         return $this->belongsTo(Recruitment::class);
     }
 
-    public function sub_criterias()
+    public function preferences()
     {
-        return $this->belongsToMany(SubCriterias::class);
+        return $this->hasMany(Preference::class);
     }
 }
