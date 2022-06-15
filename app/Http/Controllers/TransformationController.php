@@ -17,74 +17,14 @@ class TransformationController extends Controller
     public function index()
     {
         $recruitment = Recruitment::all();
+        $preference = Preference::whereRelation(
+            'candidate', 'recruitment_id', 4
+        )->first();
+        $preferences = Preference::whereRelation(
+            'candidate', 'recruitment_id', 4
+        )->get();
 
-        return view('app.transformation.index', compact('recruitment'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('app.transformation.index', compact('recruitment', 'preference', 'preferences'));
     }
 
     /**
@@ -103,6 +43,9 @@ class TransformationController extends Controller
         ->addIndexColumn()
         ->addColumn('candidate', function ($preference) {
             return $preference->candidate->name;
+        })
+        ->addColumn('sub_criterias', function ($preference) {
+            return $preference->sub_criterias->implode('name', ' | ');
         })
         ->make(true);
     }

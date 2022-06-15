@@ -110,9 +110,7 @@
                               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="{{ 'subcriterias'.$key }}">{{ $item->name }}</label>
                               <div class="col-sm-12 col-md-7">
                                 <select class="form-control select2" style="width: 100%" name="sub_criterias[]" id="{{ 'subcriterias'.$key }}">
-                                    @isset($candidate->preferences())
                                     <option value="">Pilih Sub Kriteria</option>
-                                    @endisset
                                     @foreach ($item->sub_criterias as $sub_criteria)
                                     <option value="{{ $sub_criteria->id }}">{{ $sub_criteria->name }}</option>
                                     @endforeach

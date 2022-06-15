@@ -2,45 +2,6 @@
 
 @section('title', 'Transformasi Data')
 
-@push('javascript')
-
-<script>
-    $(document).ready( function() {
-        $('.filter').change(function (e) {
-            transformation.draw();
-            e.preventDefault();
-        });
-
-        var transformation = $('#transformation-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('transformation.get-data') }}",
-                type: "POST",
-                data: function (d) {
-                    d.recruitment = $('#recruitment').val();
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            },
-            columns: [
-                {
-                    data: 'DT_RowIndex',
-                    width: 50,
-                    orderable: false,
-                    searchable: false
-                },
-                {data: 'candidate', name: 'candidate'}
-            ],
-            order: [
-                [ 1, 'asc' ]
-            ]
-        });
-    });
-</script>
-@endpush
-
 @section('content')
 <section class="section">
   <div class="section-header">
@@ -81,10 +42,27 @@
             <table id="transformation-table" class="table table-bordered table-striped dt-responsive nowrap">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Kandidat</th>
+                        <th scope="col" rowspan="2" width="5">No</th>
+                        <th scope="col" rowspan="2">Alternatif</th>
+                        <th scope="col" colspan="{{ $preference->sub_criterias->count() }}" class="text-center">Kriteria</th>
+                    </tr>
+                    <tr>
+                        @foreach ($preference->sub_criterias as $key => $item)
+                            <th scope="col">{{ 'C'.($key+1) }}</th>
+                        @endforeach
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach ($preferences as $key => $item)
+                        <tr>
+                            <td scope="row">{{ $key+1 }}</td>
+                            <td scope="row">{{ $item->candidate->name }}</td>
+                            @foreach ($item->sub_criterias as $value)
+                                <td scope="row">{{ $value->weight }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
       </div>
