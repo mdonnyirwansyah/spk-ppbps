@@ -3,10 +3,10 @@
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PreferenceController;
+use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCriteriaController;
-use App\Http\Controllers\TransformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,23 +61,19 @@ Route::middleware(['auth'])->group(function () {
         Route::put('{candidate:slug}', [CandidateController::class, 'update'])->name('update');
         Route::delete('{candidate:slug}', [CandidateController::class, 'destroy'])->name('destroy');
         Route::post('get-data', [CandidateController::class, 'getData'])->name('get-data');
-        Route::get('grading/{candidate:slug}', [CandidateController::class, 'grading'])->name('grading');
     });
 
-    Route::prefix('transformation')->name('transformation.')->group(function () {
-        Route::get('', [TransformationController::class, 'index'])->name('index');
-        Route::post('get-data', [TransformationController::class, 'getData'])->name('get-data');
+    Route::prefix('assessment')->name('assessment.')->group(function () {
+        Route::get('', [AssessmentController::class, 'index'])->name('index');
+        Route::post('filter', [AssessmentController::class, 'filter'])->name('filter');
+        Route::get('{recruitment:slug}', [AssessmentController::class, 'show'])->name('show');
+        Route::post('', [AssessmentController::class, 'store'])->name('store');
     });
 
-    Route::prefix('preference')->name('preference.')->group(function () {
-        Route::get('', [PreferenceController::class, 'index'])->name('index');
-        Route::get('create', [PreferenceController::class, 'create'])->name('create');
-        Route::post('', [PreferenceController::class, 'store'])->name('store');
-        Route::post('find', [PreferenceController::class, 'find'])->name('find');
-        Route::get('show/{preference}', [PreferenceController::class, 'show'])->name('show');
-        Route::get('edit/{preference}', [PreferenceController::class, 'edit'])->name('edit');
-        Route::put('{preference}', [PreferenceController::class, 'update'])->name('update');
-        Route::delete('{preference}', [PreferenceController::class, 'destroy'])->name('destroy');
+    Route::prefix('report')->name('report.')->group(function () {
+        Route::get('', [ReportController::class, 'index'])->name('index');
+        Route::post('filter', [ReportController::class, 'filter'])->name('filter');
+        Route::get('{recruitment:slug}', [ReportController::class, 'show'])->name('show');
     });
 
     Route::prefix('account')->name('account.')->group(function () {

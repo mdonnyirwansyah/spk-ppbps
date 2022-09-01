@@ -18,8 +18,8 @@ class Candidate extends Model
         return $this->belongsTo(Recruitment::class);
     }
 
-    public function preferences()
+    public function assessments()
     {
-        return $this->hasMany(Preference::class);
+        return $this->hasMany(Assessment::class);
     }
 }

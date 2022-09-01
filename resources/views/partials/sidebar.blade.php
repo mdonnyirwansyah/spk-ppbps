@@ -27,20 +27,14 @@
       </a>
     </li>
 
-    <li class="{{ request()->routeIs('transformation.*') ? 'active' : '' }}">
-      <a class="nav-link" href="{{ route('transformation.index') }}">
-        <i class="fas fa-sync"></i> <span>Transformasi Data</span>
+    <li class="{{ request()->routeIs('assessment.*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('assessment.index') }}">
+        <i class="fas fa-sort-amount-down-alt"></i> <span>Penilaian</span>
       </a>
     </li>
 
-    <li class="">
-      <a class="nav-link" href="#">
-        <i class="fas fa-sort-amount-down-alt"></i> <span>Preferensi</span>
-      </a>
-    </li>
-
-    <li class="">
-      <a class="nav-link" href="#">
+    <li class="{{ request()->routeIs('report.*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('report.index') }}">
         <i class="fas fa-print"></i> <span>Laporan</span>
       </a>
     </li>

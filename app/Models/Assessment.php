@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Preference extends Model
+class Assessment extends Model
 {
     use HasFactory;
 
-    protected $table = 'preferences';
+    protected $table = 'assessments';
 
     protected $guarded = [];
 
@@ -18,8 +18,8 @@ class Preference extends Model
         return $this->belongsTo(Candidate::class);
     }
 
-    public function sub_criterias()
+    public function recruitment()
     {
-        return $this->belongsToMany(SubCriteria::class);
+        return $this->belongsTo(Recruitment::class);
     }
 }

@@ -40,7 +40,11 @@
                                     <div class="media-body">
                                         <div class="media-right">{{ $item->candidates->count() }} Kandidat</div>
                                         <div class="media-title">{{ $item->title }}</div>
-                                        <div class="text-muted text-small"><div class="bullet"></div> {{ $item->created_at->diffForHumans() }}</div>
+                                        <div class="d-flex">
+                                            <div class="text-muted text-small"><div class="bullet"></div> {{ $item->created_at->diffForHumans() }}</div>
+                                            <div class="text-muted text-small"><div class="bullet"></div> 3 Kandidat ternilai</div>
+                                            <div class="text-muted text-small"><div class="bullet"></div> 2 Kandidat lulus</div>
+                                        </div>
                                     </div>
                                 </li>
                             @endforeach

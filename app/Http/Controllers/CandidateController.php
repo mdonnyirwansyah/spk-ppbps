@@ -145,9 +145,6 @@ class CandidateController extends Controller
         ->addIndexColumn()
         ->addColumn('action', function ($data) {
             return '
-                <a data-toggle="tooltip" data-placement="top" title="Penilaian" href="'.route('candidate.grading', $data).'" class="btn btn-icon">
-                    <i class="fas fa-file text-warning"></i>
-                </a>
                 <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('candidate.edit', $data).'" class="btn btn-icon">
                     <i class="fas fa-pen text-info"></i>
                 </a>
@@ -158,18 +155,5 @@ class CandidateController extends Controller
         })
         ->rawColumns(['action'])
         ->make(true);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Candidate  $candidate
-     * @return \Illuminate\Http\Response
-     */
-    public function grading(Candidate $candidate)
-    {
-        $criteria = Criteria::where('recruitment_id', $candidate->recruitment_id)->get();
-
-        return view('app.candidate.grading', compact('candidate', 'criteria'));
     }
 }

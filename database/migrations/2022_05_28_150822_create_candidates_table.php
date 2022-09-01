@@ -18,6 +18,7 @@ class CreateCandidatesTable extends Migration
             $table->foreignId('recruitment_id')->nullable()->constrained('recruitments', 'id')->onUpdate('cascade')->onDelete('restrict');
             $table->string('name');
             $table->string('slug');
+            $table->string('status');
             $table->timestamps();
         });
     }
