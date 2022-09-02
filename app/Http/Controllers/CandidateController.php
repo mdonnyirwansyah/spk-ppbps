@@ -95,7 +95,7 @@ class CandidateController extends Controller
     public function update(Request $request, Candidate $candidate)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required, unique:candidates,name'
+            'name' => 'required|unique:candidates,name'
         ]);
 
         $slug = Str::slug($request->name);
@@ -106,13 +106,34 @@ class CandidateController extends Controller
         }
 
         if ($validator->passes()) {
-            $candidate = new Candidate();
-            $candidate->recruitment_id = $request->recruitment;
             $candidate->name = $request->name;
             $candidate->slug = $slug;
             $candidate->save();
 
-            return response()->json(['success' => 'Data baru berhasil ditambah!']);
+            return response()->json(['success' => 'Data berhasil diperbarui!']);
+        } else {
+            return response()->json(['error' => $validator->errors()]);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Candidate  $candidate
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Request $request, Candidate $candidate)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required'
+        ]);
+
+        if ($validator->passes()) {
+            $candidate->status = $request->status;
+            $candidate->save();
+
+            return response()->json(['success' => 'Data status berhasil diperbarui!']);
         } else {
             return response()->json(['error' => $validator->errors()]);
         }

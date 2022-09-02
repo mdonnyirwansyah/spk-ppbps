@@ -48,24 +48,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($recruitment->candidates as $index => $candidate)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $candidate->name }}</td>
-                        @foreach ($recruitment->criterias as $criteria)
+                    @foreach ($sawResults as $index => $result)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $result['name'] }}</td>
+                            @foreach ($result['criteria'] as $key => $criteria)
+                                <td>
+                                    {{ $criteria['result'] }}
+                                </td>
+                            @endforeach
                             <td>
-                                @foreach ($criteria->sub_criterias as $sub_criteria)
-                                    @foreach ($candidate->assessments as $assessment)
-                                        {{ ($criteria->id == $assessment->criteria_id &&
-                                        $sub_criteria->weight == $assessment->weight) ? $sub_criteria->name : '' }}
-                                    @endforeach
-                                @endforeach
+                                {{ $result['score'] }}
                             </td>
-                        @endforeach
-                        <td></td>
-                        <td></td>
-                    </tr>
-                @endforeach
+                            <td><span class="badge {{ ($result['status'] == 'Lulus' ? 'badge-success' : 'badge-danger') }}">{{ $result['status'] }}</span></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

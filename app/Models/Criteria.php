@@ -22,4 +22,9 @@ class Criteria extends Model
     {
         return $this->hasMany(SubCriteria::class);
     }
+
+    public function assessments()
+    {
+        return $this->hasMany(Assessment::class);
+    }
 }

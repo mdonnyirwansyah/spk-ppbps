@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('', [CandidateController::class, 'store'])->name('store');
         Route::get('edit/{candidate:slug}', [CandidateController::class, 'edit'])->name('edit');
         Route::put('{candidate:slug}', [CandidateController::class, 'update'])->name('update');
+        Route::put('update-status/{candidate:slug}', [CandidateController::class, 'updateStatus'])->name('update-status');
         Route::delete('{candidate:slug}', [CandidateController::class, 'destroy'])->name('destroy');
         Route::post('get-data', [CandidateController::class, 'getData'])->name('get-data');
     });

@@ -130,7 +130,6 @@ class SubCriteriaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'criteria' => 'required',
-            'name' => 'required|unique:sub_criterias,name',
             'rating' => 'required',
         ]);
 

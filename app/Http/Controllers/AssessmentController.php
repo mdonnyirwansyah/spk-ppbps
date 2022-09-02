@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assessment;
+use App\Models\Candidate;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +90,9 @@ class AssessmentController extends Controller
      */
     public function show(Recruitment $recruitment)
     {
+        $candidates = Candidate::where('recruitment_id', $recruitment->id)->orderBy('name','Asc')->has('assessments')->get();
+        $sawResults = Assessment::dss_saw($recruitment->id);
 
-        return view('app.assessment.show', compact('recruitment'));
+        return view('app.assessment.show', compact('recruitment', 'candidates','sawResults'));
     }
 }

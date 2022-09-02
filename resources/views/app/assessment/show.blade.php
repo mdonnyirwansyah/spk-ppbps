@@ -3,6 +3,7 @@
 @section('title', 'Penilaian')
 
 @push('javascript')
+@include('app.assessment.actions')
 <script>
     $(document).ready( function() {
         $('#assessments-table').DataTable();

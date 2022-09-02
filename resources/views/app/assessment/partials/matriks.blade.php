@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($recruitment->candidates as $index => $candidate)
+        @foreach ($candidates as $index => $candidate)
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $candidate->name }}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assessment;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,7 +46,8 @@ class ReportController extends Controller
      */
     public function show(Recruitment $recruitment)
     {
+        $sawResults = Assessment::dss_saw($recruitment->id);
 
-        return view('app.report.show', compact('recruitment'));
+        return view('app.report.show', compact('recruitment', 'sawResults'));
     }
 }
