@@ -4,6 +4,13 @@
 
 @push('javascript')
   {!! $dataTable->scripts() !!}
+
+  @if ($message = Session::get('success'))
+    <script>
+        toastr.success('{{ $message }}', 'Pemberitahuan,')
+    </script>
+  @endif
+
   @include('app.recruitment.actions')
 @endpush
 
@@ -26,7 +33,7 @@
             <a href="{{ route('recruitment.create') }}" class="btn btn-primary">Tambah</a>
           </div>
           <hr>
-          {!! $dataTable->table(['class' => 'table table-bordered table-striped dt-responsive nowrap', 'cellpadding' => '0', 'style' => 'width: 100%']) !!}
+          {!! $dataTable->table(['class' => 'table table-bordered dt-responsive nowrap', 'cellpadding' => '0', 'style' => 'width: 100%']) !!}
         </div>
       </div>
     </div>

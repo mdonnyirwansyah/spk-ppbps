@@ -20,7 +20,7 @@
           <div class="section-header-button d-flex flex-column">
             <form class="form-inline" action="{{ route('assessment.filter') }}" method="post">
                 @csrf
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-primary" type="submit">Pilih</button>
                     </div>

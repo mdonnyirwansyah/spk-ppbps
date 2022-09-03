@@ -23,7 +23,7 @@ class Assessment extends Model
         return $this->belongsTo(Recruitment::class);
     }
 
-    public function getMaxMin($criterias)
+    public static function getMaxMin($criterias)
     {
         $arr=[];
         foreach ($criterias as $key => $criteria) {
@@ -38,7 +38,7 @@ class Assessment extends Model
         return $arr;
     }
 
-    public function dss_saw($recruitment)
+    public static function dss_saw($recruitment)
     {
         $criterias = Criteria::where('recruitment_id', $recruitment)->orderBy('id','Asc')->has('assessments')->with('sub_criterias')->get();
         $candidates = Candidate::where('recruitment_id', $recruitment)->orderBy('name','Asc')->has('assessments')->with('assessments')->get();

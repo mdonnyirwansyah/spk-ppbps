@@ -6,7 +6,6 @@ use App\DataTables\RecruitmentDataTable;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 
 class RecruitmentController extends Controller
 {
@@ -38,20 +37,16 @@ class RecruitmentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate( [
             'title' => 'required|unique:recruitments',
         ]);
 
-        if ($validator->passes()) {
-            $recruitment = new Recruitment();
-            $recruitment->title = $request->title;
-            $recruitment->slug = Str::slug($request->title);
-            $recruitment->save();
+        Recruitment::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title)
+        ]);
 
-            return response()->json(['success' => 'Data baru berhasil ditambah!']);
-        } else {
-            return response()->json(['error' => $validator->errors()]);
-        }
+        return redirect()->route('recruitment.index')->with('success', 'Data baru berhasil ditambah!');
     }
 
     /**
@@ -74,19 +69,16 @@ class RecruitmentController extends Controller
      */
     public function update(Request $request, Recruitment $recruitment)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'title' => 'required|unique:recruitments,title',
         ]);
 
-        if ($validator->passes()) {
-            $recruitment->title = $request->title;
-            $recruitment->slug = Str::slug($request->title);
-            $recruitment->save();
+        $recruitment->update([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title)
+         ]);
 
-            return response()->json(['success' => 'Data berhasil diperbarui!']);
-        } else {
-            return response()->json(['error' => $validator->errors()]);
-        }
+        return redirect()->route('recruitment.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**

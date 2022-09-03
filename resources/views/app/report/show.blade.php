@@ -35,16 +35,19 @@
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Cetak</button>
             <hr>
-            <table id="report-table" class="table table-bordered table-striped dt-responsive nowrap">
+            <table id="report-table" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Rank</th>
-                        <th>Nama</th>
+                        <th rowspan="2" style="vertical-align: middle;">Rank.</th>
+                        <th rowspan="2" style="vertical-align: middle;">Nama</th>
+                        <th colspan="4" style="text-align: center;">Kriteria</th>
+                        <th rowspan="2" style="vertical-align: middle;">Skor</th>
+                        <th rowspan="2" style="vertical-align: middle;">Status</th>
+                    </tr>
+                    <tr>
                         @foreach ($recruitment->criterias as $criteria)
                             <th>{{ $criteria->name }}</th>
                         @endforeach
-                        <th>Skor</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -37,7 +37,7 @@ class AssessmentController extends Controller
 
         $recruitment = Recruitment::find($request->recruitment);
 
-        return redirect(route('assessment.show', $recruitment));
+        return redirect(route('assessment.assessment', $recruitment));
     }
 
     /**
@@ -76,9 +76,9 @@ class AssessmentController extends Controller
                 }
             });
 
-            return redirect()->back();
+            return response()->json(['success' => 'Data kriteria berhasil diperbarui!']);
         } else {
-            return redirect()->back();
+            return response()->json(['error' => 'Data kriteria gagal diperbarui!']);
         }
     }
 
@@ -88,11 +88,36 @@ class AssessmentController extends Controller
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function show(Recruitment $recruitment)
+    public function assessment(Recruitment $recruitment)
     {
         $candidates = Candidate::where('recruitment_id', $recruitment->id)->orderBy('name','Asc')->has('assessments')->get();
+
+        return view('app.assessment.assessment', compact('recruitment', 'candidates'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recruitment  $recruitment
+     * @return \Illuminate\Http\Response
+     */
+    public function weight(Recruitment $recruitment)
+    {
+        $candidates = Candidate::where('recruitment_id', $recruitment->id)->orderBy('name','Asc')->has('assessments')->get();
+
+        return view('app.assessment.weight', compact('recruitment', 'candidates'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recruitment  $recruitment
+     * @return \Illuminate\Http\Response
+     */
+    public function preference(Recruitment $recruitment)
+    {
         $sawResults = Assessment::dss_saw($recruitment->id);
 
-        return view('app.assessment.show', compact('recruitment', 'candidates','sawResults'));
+        return view('app.assessment.preference', compact('recruitment', 'sawResults'));
     }
 }

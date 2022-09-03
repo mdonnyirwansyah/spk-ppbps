@@ -67,8 +67,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('assessment')->name('assessment.')->group(function () {
         Route::get('', [AssessmentController::class, 'index'])->name('index');
         Route::post('filter', [AssessmentController::class, 'filter'])->name('filter');
-        Route::get('{recruitment:slug}', [AssessmentController::class, 'show'])->name('show');
         Route::post('', [AssessmentController::class, 'store'])->name('store');
+        Route::get('{recruitment:slug}', [AssessmentController::class, 'assessment'])->name('assessment');
+        Route::get('weight/{recruitment:slug}', [AssessmentController::class, 'weight'])->name('weight');
+        Route::get('preference/{recruitment:slug}', [AssessmentController::class, 'preference'])->name('preference');
     });
 
     Route::prefix('report')->name('report.')->group(function () {

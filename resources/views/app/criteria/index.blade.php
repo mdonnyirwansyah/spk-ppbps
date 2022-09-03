@@ -69,7 +69,7 @@
           <div class="section-header-button d-flex flex-column">
             <form class="form-inline" action="{{ route('criteria.create') }}" method="post">
                 @csrf
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-primary" type="submit">Tambah</button>
                     </div>
@@ -88,7 +88,7 @@
             </form>
           </div>
           <hr>
-            <table id="criteria-table" class="table table-bordered table-striped dt-responsive nowrap">
+            <table id="criteria-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>No</th>

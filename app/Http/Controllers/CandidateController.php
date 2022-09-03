@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
+use function PHPSTORM_META\map;
+
 class CandidateController extends Controller
 {
     /**
@@ -135,7 +137,7 @@ class CandidateController extends Controller
 
             return response()->json(['success' => 'Data status berhasil diperbarui!']);
         } else {
-            return response()->json(['error' => $validator->errors()]);
+            return response()->json(['error' => 'Data status gagal diperbarui!']);
         }
     }
 
