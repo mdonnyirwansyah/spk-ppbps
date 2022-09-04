@@ -72,6 +72,12 @@
         });
     });
 </script>
+
+@if ($message = Session::get('success'))
+  <script>
+      toastr.success('{{ $message }}', 'Pemberitahuan,')
+  </script>
+@endif
 @endpush
 
 @section('content')
@@ -90,14 +96,14 @@
       <div class="card-body">
         <div class="col-12">
             <div class="section-header-button d-flex flex-column">
-              <form class="form-inline" action="{{ route('sub-criteria.create') }}" method="post">
+              <form class="form-inline" method="POST" action="{{ route('sub-criteria.filter') }}">
                   @csrf
                   <div class="input-group">
                       <div class="input-group-prepend">
                           <button class="btn btn-primary" type="submit">Tambah</button>
                       </div>
                       <select class="custom-select filter @error('recruitment') is-invalid @enderror" name="recruitment" id="recruitment">
-                          <option value="" selected>Pilih Rekrutmen</option>
+                          <option selected disabled>Pilih Rekrutmen</option>
                           @foreach ($recruitment as $item)
                           <option value="{{ $item->id }}" >{{ $item->title }}</option>
                           @endforeach
@@ -108,7 +114,7 @@
                           </span>
                       @enderror
                       <select class="custom-select @error('recruitment') is-invalid @enderror" name="criteria" id="criteria">
-                          <option value="" selected>Pilih Kriteria</option>
+                          <option selected disabled>Pilih Kriteria</option>
                       </select>
                       @error('criteria')
                           <span class="invalid-feedback" role="alert">

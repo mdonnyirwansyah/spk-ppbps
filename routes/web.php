@@ -34,7 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('criteria')->name('criteria.')->group(function () {
         Route::get('', [CriteriaController::class, 'index'])->name('index');
-        Route::post('create', [CriteriaController::class, 'create'])->name('create');
+        Route::post('filter', [CriteriaController::class, 'filter'])->name('filter');
+        Route::get('{recruitment:slug}/create', [CriteriaController::class, 'create'])->name('create');
         Route::post('', [CriteriaController::class, 'store'])->name('store');
         Route::get('edit/{criteria:slug}', [CriteriaController::class, 'edit'])->name('edit');
         Route::put('{criteria:slug}', [CriteriaController::class, 'update'])->name('update');
@@ -44,7 +45,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('sub-criteria')->name('sub-criteria.')->group(function () {
         Route::get('', [SubCriteriaController::class, 'index'])->name('index');
-        Route::post('create', [SubCriteriaController::class, 'create'])->name('create');
+        Route::post('filter', [SubCriteriaController::class, 'filter'])->name('filter');
+        Route::get('{criteria:slug}/create', [SubCriteriaController::class, 'create'])->name('create');
         Route::post('', [SubCriteriaController::class, 'store'])->name('store');
         Route::get('edit/{sub_criteria:slug}', [SubCriteriaController::class, 'edit'])->name('edit');
         Route::put('{sub_criteria:slug}', [SubCriteriaController::class, 'update'])->name('update');

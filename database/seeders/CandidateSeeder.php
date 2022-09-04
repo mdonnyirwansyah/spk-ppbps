@@ -16,11 +16,11 @@ class CandidateSeeder extends Seeder
     public function run()
     {
         $candidate = collect([
-            ['recruitment_id' => 4, 'name' => 'Irwansyah'],
-            ['recruitment_id' => 4, 'name' => 'Aby'],
-            ['recruitment_id' => 4, 'name' => 'Yuda'],
-            ['recruitment_id' => 4, 'name' => 'Anggara Putra'],
-            ['recruitment_id' => 4, 'name' => 'Dion']
+            ['recruitment_id' => 4, 'name' => 'Ade Febrianto'],
+            ['recruitment_id' => 4, 'name' => 'Ade Indrayadi Pulungan'],
+            ['recruitment_id' => 4, 'name' => 'Siti Hafsah'],
+            ['recruitment_id' => 4, 'name' => 'Vela Yunita'],
+            ['recruitment_id' => 4, 'name' => 'Vieny Meiliani']
         ]);
 
         $candidate->each( function ($item) {

@@ -67,11 +67,11 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $candidate->name }}</td>
                             <form action="{{ route('assessment.store') }}" id="update-assessment-{{ $candidate->id }}">
-                                <input type="hidden" name="recruitment_id" value="{{ $recruitment->id }}"/>
-                                <input type="hidden" name="candidate_id" value="{{ $candidate->id }}"/>
+                                <input type="hidden" name="recruitment" value="{{ $recruitment->id }}"/>
+                                <input type="hidden" name="candidate" value="{{ $candidate->id }}"/>
                                 @foreach ($recruitment->criterias as $criteria)
                                     <td>
-                                        <input type="hidden" name="criteria[]" value="{{ $criteria->id }}"/>
+                                        <input type="hidden" name="criterias[]" value="{{ $criteria->id }}"/>
                                         <select class="form-control" style="width: 100%" name="sub_criterias[]">
                                             <option selected disabled>Pilih</option>
                                             @foreach ($criteria->sub_criterias as $sub_criteria)
@@ -87,7 +87,7 @@
                                     </td>
                                 @endforeach
                                 <td>
-                                    <button type="submit" data-toggle="tooltip" data-placement="top" title="Simpan" onClick="updateAssessment({{ $candidate->id }})" class="btn btn-icon">
+                                    <button type="submit" id="btn" data-toggle="tooltip" data-placement="top" title="Simpan" onClick="updateAssessment({{ $candidate->id }})" class="btn btn-icon">
                                         <i class="fas fa-save text-primary"></i>
                                     </button>
                                 </td>

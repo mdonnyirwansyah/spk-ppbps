@@ -1,6 +1,6 @@
 <script>
     function updateAssessment(id) {
-        $('#update-assessment-' + id).submit(function (e) {
+        $('#update-assessment-' + id).unbind().bind('submit', function (e) {
             e.preventDefault();
             $('#btn').attr('disabled', true);
             $.ajax({
@@ -19,7 +19,7 @@
                         toastr.success(response.success, 'Pemberitahuan,');
                         $('#btn').attr('disabled', false);
                     } else {
-                        swal(response.error);
+                        swal('Pemberitahuan', response.error);
                         $('#btn').attr('disabled', false);
                     }
                 },
@@ -31,7 +31,7 @@
     }
 
     function updateStatus(id) {
-        $('#update-status-' + id).submit(function (e) {
+        $('#update-status-' + id).unbind().bind('submit', function (e) {
             e.preventDefault();
             $('#btn').attr('disabled', true);
             $.ajax({
@@ -50,7 +50,7 @@
                         toastr.success(response.success, 'Pemberitahuan,');
                         $('#btn').attr('disabled', false);
                     } else {
-                        swal(response.error);
+                        swal('Pemberitahuan', response.error);
                         $('#btn').attr('disabled', false);
                     }
                 },

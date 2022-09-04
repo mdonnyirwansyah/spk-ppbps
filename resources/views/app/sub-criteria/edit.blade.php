@@ -3,63 +3,11 @@
 @section('title', 'Edit Sub Kriteria')
 
 @push('javascript')
-<script>
-    function printErrorMsg (msg) {
-        $.each( msg, function ( key, value ) {
-            $('#'+key).addClass('is-invalid');
-            $('.'+key+'_err').text(value);
-            $('#'+key).change(function () {
-                $('#'+key).removeClass('is-invalid');
-                $('#'+key).addClass('is-valid');
-            } );
-        });
-    }
-
-    $(document).ready( function() {
-        $('#form-action').submit(function (e) {
-            e.preventDefault();
-            $('#btn').attr('disabled', true);
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if(response.success) {
-                        toastr.success(response.success, 'Selamat,');
-
-                        async function redirect() {
-                        let promise = new Promise(function(resolve, reject) {
-                            setTimeout(function() { resolve('{{ route("sub-criteria.index") }}'); }, 3000);
-                        });
-                        window.location.href = await promise;
-                        }
-
-                        redirect();
-                    } else if(response.warning) {
-                        toastr.warning(response.warning, 'Peringatan,');
-                        $('#btn').attr('disabled', false);
-                    } else if(response.failed) {
-                        toastr.error(response.failed, 'Gagal,');
-                        $('#btn').attr('disabled', false);
-                    } else {
-                        printErrorMsg(response.error);
-                        $('#btn').attr('disabled', false);
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + '\n' + xhr.responseText + '\n' + thrownError);
-                }
-            });
-        });
-    });
-</script>
+@if ($message = Session::get('error'))
+  <script>
+      swal('Pemberitahuan', '{{ $message }}');
+  </script>
+@endif
 @endpush
 
 @section('content')
@@ -87,7 +35,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('sub-criteria.update', $subCriteria) }}" id="form-action" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('sub-criteria.update', $subCriteria) }}" enctype="multipart/form-data">
                             @method('PUT')
                             @include('app.sub-criteria.partials.form')
                         </form>

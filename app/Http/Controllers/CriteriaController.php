@@ -6,7 +6,6 @@ use App\Models\Criteria;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class CriteriaController extends Controller
@@ -18,25 +17,36 @@ class CriteriaController extends Controller
      */
     public function index()
     {
-        $recruitment = Recruitment::all();
+        $recruitments = Recruitment::all();
 
-        return view('app.criteria.index', compact('recruitment'));
+        return view('app.criteria.index', compact('recruitments'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function filter(Request $request)
     {
-        Validator::make($request->all(), [
+        $request->validate([
             'recruitment' => 'required',
-        ])->validate();
+        ]);
 
         $recruitment = Recruitment::find($request->recruitment);
 
+        return redirect(route('criteria.create', $recruitment));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recruitment  $recruitment
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Recruitment $recruitment)
+    {
         return view('app.criteria.create', compact('recruitment'));
     }
 
@@ -48,37 +58,34 @@ class CriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
-            'weight' => 'required|numeric|gt:0',
+            'type' => 'required',
+            'weight' => 'required|numeric|gt:0'
         ]);
 
-        if ($validator->passes()) {
-            $slug = Str::slug($request->name.'-'.$request->recruitment);
-            $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
+        $slug = Str::slug($request->name.'-'.$request->recruitment);
+        $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
 
-            if ($isDuplicate) {
-                return response()->json(['failed' => 'Data sudah ada!']);
-            } else {
-                $limit = 1;
-                $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') + $request->weight;
-                $isWeightOverLimit = $totalWeight > $limit ? true : false;
-                if ($isWeightOverLimit) {
-                    return response()->json(['warning' => 'Bobot melebihi batas!']);
-                } else {
-                    $criteria = new Criteria();
-                    $criteria->recruitment_id = $request->recruitment;
-                    $criteria->name = $request->name;
-                    $criteria->type = $request->type;
-                    $criteria->weight = floatval($request->weight);
-                    $criteria->slug = $slug;
-                    $criteria->save();
-
-                    return response()->json(['success' => 'Data baru berhasil ditambah!']);
-                }
-            }
+        if ($isDuplicate) {
+            return response()->json(['failed' => 'Data sudah ada!']);
         } else {
-            return response()->json(['error' => $validator->errors()]);
+            $limit = 1;
+            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') + $request->weight;
+            $isWeightOverLimit = $totalWeight > $limit ? true : false;
+            if ($isWeightOverLimit) {
+                return response()->json(['warning' => 'Bobot melebihi batas!']);
+            } else {
+                Criteria::create([
+                    'recruitment_id' => $request->recruitment,
+                    'name' => $request->name,
+                    'type' => $request->type,
+                    'weight' => floatval($request->weight),
+                    'slug' => $slug
+                ]);
+
+                return redirect()->route('criteria.index')->with('success', 'Data baru berhasil ditambah!');
+            }
         }
     }
 
@@ -102,36 +109,33 @@ class CriteriaController extends Controller
      */
     public function update(Request $request, Criteria $criteria)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'weight' => 'required|numeric',
         ]);
 
-        if ($validator->passes()) {
-            $slug = Str::slug($request->name.'-'.$request->recruitment);
-            $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
+        $slug = Str::slug($request->name.'-'.$request->recruitment);
+        $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
 
-            if ($isDuplicate && $criteria->weight == $request->weight) {
-                return response()->json(['failed' => 'Data sudah ada!']);
-            } else {
-                $limit = 1;
-                $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') - $criteria->weight + $request->weight;
-                $isWeightOverLimit = $totalWeight > $limit ? true : false;
-                if ($isWeightOverLimit) {
-                    return response()->json(['warning' => 'Bobot melebihi batas!']);
-                } else {
-                    $criteria->recruitment_id = $request->recruitment;
-                    $criteria->name = $request->name;
-                    $criteria->type = $request->type;
-                    $criteria->weight = floatval($request->weight);
-                    $criteria->slug = $slug;
-                    $criteria->save();
-
-                    return response()->json(['success' => 'Data berhasil diperbarui!']);
-                }
-            }
+        if ($isDuplicate && $criteria->weight == $request->weight) {
+            return response()->json(['failed' => 'Data sudah ada!']);
         } else {
-            return response()->json(['error' => $validator->errors()]);
+            $limit = 1;
+            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') - $criteria->weight + $request->weight;
+            $isWeightOverLimit = $totalWeight > $limit ? true : false;
+            if ($isWeightOverLimit) {
+                return response()->json(['warning' => 'Bobot melebihi batas!']);
+            } else {
+                $criteria->update([
+                    'recruitment_id' => $request->recruitment,
+                    'name' => $request->name,
+                    'type' => $request->type,
+                    'weight' => floatval($request->weight),
+                    'slug' => $slug
+                ]);
+
+                return redirect()->route('criteria.index')->with('success', 'Data berhasil diperbarui!');
+            }
         }
     }
 
@@ -156,21 +160,21 @@ class CriteriaController extends Controller
      */
     public function getData(Request $request)
     {
-        $criteria = Criteria::where('recruitment_id', $request->recruitment)->get();
+        $criterias = Criteria::where('recruitment_id', $request->recruitment)->get();
 
-        return DataTables::of($criteria)
+        return DataTables::of($criterias)
         ->addIndexColumn()
-        ->addColumn('weight', function ($data) {
-            $percentage = $data->weight * 100;
+        ->addColumn('weight', function ($criteria) {
+            $percentage = $criteria->weight * 100;
 
             return $percentage.'%';
         })
-        ->addColumn('action', function ($data) {
+        ->addColumn('action', function ($criteria) {
             return '
-                <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('criteria.edit', $data).'" class="btn btn-icon">
+                <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('criteria.edit', $criteria).'" class="btn btn-icon">
                     <i class="fas fa-pen text-info"></i>
                 </a>
-                <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$data->id.')" id="delete-'.$data->id.'" delete-route="'.route('criteria.destroy', $data).'" class="btn btn-icon">
+                <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$criteria->id.')" id="delete-'.$criteria->id.'" delete-route="'.route('criteria.destroy', $criteria).'" class="btn btn-icon">
                     <i class="fas fa-trash text-danger"></i>
                 </button>
             ';

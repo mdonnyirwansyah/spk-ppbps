@@ -1,7 +1,9 @@
+@csrf
+
 <div class="form-group row mb-4">
     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="recruitment">Recruitment</label>
     <div class="col-sm-12 col-md-7">
-        <select class="form-control" style="width: 100%" name="recruitment" id="recruitment" readonly>
+        <select class="form-control" style="width: 100%" name="recruitment" readonly>
             @isset($subCriteria)
                 <option value="{{ $subCriteria->criteria_id }}" selected>{{ $subCriteria->criteria->recruitment->title }}</option>
             @else
@@ -14,7 +16,7 @@
 <div class="form-group row mb-4">
     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="criteria">Kriteria</label>
     <div class="col-sm-12 col-md-7">
-        <select class="form-control" style="width: 100%" name="criteria" id="criteria" readonly>
+        <select class="form-control" style="width: 100%" name="criteria" readonly>
             @isset($subCriteria)
                 <option value="{{ $subCriteria->criteria_id }}" selected>{{ $subCriteria->criteria->name }}</option>
             @else
@@ -27,39 +29,39 @@
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="name">Nama</label>
   <div class="col-sm-12 col-md-7">
-      <input type="text" class="form-control" name="name" id="name" @isset($subCriteria) value="{{ $subCriteria->name }}" @endisset />
-      <small class="invalid-feedback name_err"></small>
+      <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" @isset($subCriteria) value="{{ $subCriteria->name }}" @endisset />
+      @error('name')
+        <span class="invalid-feedback" role="alert">
+            <small>{{ $message }}</small>
+        </span>
+      @enderror
   </div>
 </div>
 
 <div class="form-group row mb-4">
     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="rating">Rating</label>
     <div class="col-sm-12 col-md-7">
-      <select class="form-control select2" style="width: 100%" name="rating" id="rating">
-        @isset($subCriteria)
-            <option value="Sangat Tinggi" class="@if ($subCriteria->rating == "Sangat Tinggi") d-none @endif" @if ($subCriteria->rating == "Sangat Tinggi") selected @endif>Sangat Tinggi</option>
-            <option value="Tinggi" class="@if ($subCriteria->rating == "Tinggi") d-none @endif" @if ($subCriteria->rating == "Tinggi") selected @endif>Tinggi</option>
-            <option value="Cukup" class="@if ($subCriteria->rating == "Cukup") d-none @endif" @if ($subCriteria->rating == "Cukup") selected @endif>Cukup</option>
-            <option value="Rendah" class="@if ($subCriteria->rating == "Rendah") d-none @endif" @if ($subCriteria->rating == "Rendah") selected @endif>Rendah</option>
-            <option value="Sangat Rendah" class="@if ($subCriteria->rating == "Sangat Rendah") d-none @endif" @if ($subCriteria->rating == "Sangat Rendah") selected @endif>Sangat Rendah</option>
-        @else
-            <option value="" selected>Pilih Rating</option>
-            <option value="Sangat Tinggi">Sangat Tinggi</option>
-            <option value="Tinggi">Tinggi</option>
-            <option value="Cukup">Cukup</option>
-            <option value="Rendah">Rendah</option>
-            <option value="Sangat Rendah">Sangat Rendah</option>
-        @endisset
+      <select class="form-control @error('rating') is-invalid @enderror" style="width: 100%" name="rating">
+            <option selected disabled>Pilih Rating</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Tinggi' ? 'selected' : '') }} @endisset value="Sangat Tinggi">Sangat Tinggi</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Tinggi' ? 'selected' : '') }} @endisset value="Tinggi">Tinggi</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Cukup' ? 'selected' : '') }} @endisset value="Cukup">Cukup</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Rendah' ? 'selected' : '') }} @endisset value="Rendah">Rendah</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Rendah' ? 'selected' : '') }} @endisset value="Sangat Rendah">Sangat Rendah</option>
       </select>
-      <small class="invalid-feedback rating_err"></small>
+      @error('rating')
+        <span class="invalid-feedback" role="alert">
+            <small>{{ $message }}</small>
+        </span>
+      @enderror
     </div>
 </div>
 
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
   <div class="col-sm-12 col-md-7">
-    <button class="btn btn-primary" id="btn">
-      @isset($candidate)
+    <button class="btn btn-primary">
+      @isset($subCriteria)
         Simpan Perubahan
       @else
         Submit

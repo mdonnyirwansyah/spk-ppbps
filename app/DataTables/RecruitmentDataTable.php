@@ -19,12 +19,12 @@ class RecruitmentDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->addColumn('action', function ($data) {
+            ->addColumn('action', function ($recruitment) {
                 return '
-                    <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('recruitment.edit', $data).'" class="btn btn-icon">
+                    <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('recruitment.edit', $recruitment).'" class="btn btn-icon">
                         <i class="fas fa-pen text-info"></i>
                     </a>
-                    <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$data->id.')" id="delete-'.$data->id.'" delete-route="'.route('recruitment.destroy', $data).'" class="btn btn-icon">
+                    <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$recruitment->id.')" id="delete-'.$recruitment->id.'" delete-route="'.route('recruitment.destroy', $recruitment).'" class="btn btn-icon">
                         <i class="fas fa-trash text-danger"></i>
                     </button>
                 ';

@@ -25,20 +25,31 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function filter(Request $request)
     {
-        Validator::make($request->all(), [
+        $request->validate([
             'recruitment' => 'required',
             'criteria' => 'required'
-        ])->validate();
+        ]);
 
         $criteria = Criteria::find($request->criteria);
 
+        return redirect(route('sub-criteria.create', $criteria));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Criteria  $criteria
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Criteria $criteria)
+    {
         return view('app.sub-criteria.create', compact('criteria'));
     }
 
@@ -50,8 +61,7 @@ class SubCriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'criteria' => 'required',
+        $request->validate([
             'name' => 'required',
             'rating' => 'required',
         ]);
@@ -84,25 +94,21 @@ class SubCriteriaController extends Controller
                 break;
         }
 
-        if ($validator->passes()) {
-            $slug = Str::slug($request->name.'-'.$request->criteria);
-            $isDuplicate = SubCriteria::where('slug', $slug)->first() || SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->first() ? true : false;
+        $slug = Str::slug($request->name.'-'.$request->criteria);
+        $isDuplicate = SubCriteria::where('slug', $slug)->first() || SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->first() ? true : false;
 
-            if ($isDuplicate) {
-                return response()->json(['failed' => 'Data sudah ada!']);
-            } else {
-                $subCriteria = new SubCriteria();
-                $subCriteria->criteria_id = $request->criteria;
-                $subCriteria->name = $request->name;
-                $subCriteria->rating = $request->rating;
-                $subCriteria->weight = $weight;
-                $subCriteria->slug = $slug;
-                $subCriteria->save();
-
-                return response()->json(['success' => 'Data baru berhasil ditambah!']);
-            }
+        if ($isDuplicate) {
+            return redirect()->back()->with('error', 'Data sudah ada!');
         } else {
-            return response()->json(['error' => $validator->errors()]);
+            SubCriteria::create([
+                'criteria_id' => $request->criteria,
+                'name' => $request->name,
+                'rating' => $request->rating,
+                'weight' => $weight,
+                'slug' => $slug
+            ]);
+
+            return redirect()->route('sub-criteria.index')->with('success', 'Data baru berhasil ditambah!');
         }
     }
 
@@ -128,9 +134,9 @@ class SubCriteriaController extends Controller
      */
     public function update(Request $request, SubCriteria $subCriteria)
     {
-        $validator = Validator::make($request->all(), [
-            'criteria' => 'required',
-            'rating' => 'required',
+        $request->validate([
+            'name' => 'required',
+            'rating' => 'required'
         ]);
 
         $weight = $request->rating;
@@ -161,24 +167,21 @@ class SubCriteriaController extends Controller
                 break;
         }
 
-        if ($validator->passes()) {
-            $slug = Str::slug($request->name.'-'.$request->criteria);
-            $isDuplicate = SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->count() > 1 ? true : false;
+        $slug = Str::slug($request->name.'-'.$request->criteria);
+        $isDuplicate = SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->count() > 1 ? true : false;
 
-            if ($isDuplicate) {
-                return response()->json(['failed' => 'Data sudah ada!']);
-            } else {
-                $subCriteria->criteria_id = $request->criteria;
-                $subCriteria->name = $request->name;
-                $subCriteria->rating = $request->rating;
-                $subCriteria->weight = $weight;
-                $subCriteria->slug = $slug;
-                $subCriteria->save();
-
-                return response()->json(['success' => 'Data berhasil diperbarui!']);
-            }
+        if ($isDuplicate) {
+            return redirect()->back()->with('error', 'Data sudah ada!');
         } else {
-            return response()->json(['error' => $validator->errors()]);
+            $subCriteria->update([
+                'criteria_id' => $request->criteria,
+                'name' => $request->name,
+                'rating' => $request->rating,
+                'weight' => $weight,
+                'slug' => $slug
+            ]);
+
+            return redirect()->route('sub-criteria.index')->with('success', 'Data berhasil diperbarui!');
         }
     }
 
@@ -203,16 +206,16 @@ class SubCriteriaController extends Controller
      */
     public function getData(Request $request)
     {
-        $subCriteria = SubCriteria::where('criteria_id', $request->criteria)->get();
+        $subCriterias = SubCriteria::where('criteria_id', $request->criteria)->get();
 
-        return DataTables::of($subCriteria)
+        return DataTables::of($subCriterias)
         ->addIndexColumn()
-        ->addColumn('action', function ($data) {
+        ->addColumn('action', function ($subCriteria) {
             return '
-                <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('sub-criteria.edit', $data).'" class="btn btn-icon">
+                <a data-toggle="tooltip" data-placement="top" title="Edit" href="'.route('sub-criteria.edit', $subCriteria).'" class="btn btn-icon">
                     <i class="fas fa-pen text-info"></i>
                 </a>
-                <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$data->id.')" id="delete-'.$data->id.'" delete-route="'.route('sub-criteria.destroy', $data).'" class="btn btn-icon">
+                <button data-toggle="tooltip" data-placement="top" title="Hapus" onClick="deleteRecord('.$subCriteria->id.')" id="delete-'.$subCriteria->id.'" delete-route="'.route('sub-criteria.destroy', $subCriteria).'" class="btn btn-icon">
                     <i class="fas fa-trash text-danger"></i>
                 </button>
             ';
