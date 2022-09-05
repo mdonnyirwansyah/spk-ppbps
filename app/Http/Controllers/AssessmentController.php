@@ -19,9 +19,9 @@ class AssessmentController extends Controller
      */
     public function index()
     {
-        $recruitment = Recruitment::all();
+        $recruitments = Recruitment::all();
 
-        return view('app.assessment.index', compact('recruitment'));
+        return view('app.assessment.index', compact('recruitments'));
     }
 
     /**
@@ -92,9 +92,7 @@ class AssessmentController extends Controller
      */
     public function assessment(Recruitment $recruitment)
     {
-        $candidates = Candidate::where('recruitment_id', $recruitment->id)->orderBy('name','Asc')->has('assessments')->get();
-
-        return view('app.assessment.assessment', compact('recruitment', 'candidates'));
+        return view('app.assessment.assessment', compact('recruitment'));
     }
 
     /**

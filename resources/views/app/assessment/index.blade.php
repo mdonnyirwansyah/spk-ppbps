@@ -26,8 +26,8 @@
                     </div>
                     <select class="custom-select filter @error('recruitment') is-invalid @enderror" name="recruitment" id="recruitment">
                         <option selected disabled>Pilih Rekrutmen</option>
-                        @foreach ($recruitment as $item)
-                        <option value="{{ $item->id }}" >{{ $item->title }}</option>
+                        @foreach ($recruitments as $recruitment)
+                        <option value="{{ $recruitment->id }}" >{{ $recruitment->title }}</option>
                         @endforeach
                     </select>
                     @error('recruitment')

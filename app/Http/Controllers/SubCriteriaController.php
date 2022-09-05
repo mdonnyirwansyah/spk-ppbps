@@ -7,7 +7,6 @@ use App\Models\Recruitment;
 use App\Models\SubCriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubCriteriaController extends Controller
@@ -19,9 +18,9 @@ class SubCriteriaController extends Controller
      */
     public function index()
     {
-        $recruitment = Recruitment::all();
+        $recruitments = Recruitment::all();
 
-        return view('app.sub-criteria.index', compact('recruitment'));
+        return view('app.sub-criteria.index', compact('recruitments'));
     }
 
     /**

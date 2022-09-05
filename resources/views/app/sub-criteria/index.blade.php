@@ -9,6 +9,7 @@
     $(document).ready( function() {
         $('#recruitment').change(function (e) {
             e.preventDefault();
+            $('#criteria').attr('disabled', true);
             var recruitment = e.target.value;
 
             $.ajax({
@@ -21,8 +22,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success:function (response) {
+                    $('#criteria').attr('disabled', false);
                     $('#criteria').empty();
-                    $("#criteria").append('<option>Pilih Kriteria</option>');
+                    $('#criteria').append('<option>Pilih Kriteria</option>');
                     $.each(response.criterias, function(index, criteria) {
                         $('#criteria').append('<option value="'+criteria.id+'">'+criteria.name+'</option>');
                     })
@@ -104,8 +106,8 @@
                       </div>
                       <select class="custom-select filter @error('recruitment') is-invalid @enderror" name="recruitment" id="recruitment">
                           <option selected disabled>Pilih Rekrutmen</option>
-                          @foreach ($recruitment as $item)
-                          <option value="{{ $item->id }}" >{{ $item->title }}</option>
+                          @foreach ($recruitments as $recruitment)
+                          <option value="{{ $recruitment->id }}" >{{ $recruitment->title }}</option>
                           @endforeach
                       </select>
                       @error('recruitment')
@@ -113,7 +115,7 @@
                               <small>{{ $message }}</small>
                           </span>
                       @enderror
-                      <select class="custom-select @error('recruitment') is-invalid @enderror" name="criteria" id="criteria">
+                      <select class="custom-select @error('recruitment') is-invalid @enderror" name="criteria" id="criteria" disabled>
                           <option selected disabled>Pilih Kriteria</option>
                       </select>
                       @error('criteria')

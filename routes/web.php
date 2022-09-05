@@ -57,7 +57,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('candidate')->name('candidate.')->group(function () {
         Route::get('', [CandidateController::class, 'index'])->name('index');
-        Route::post('create', [CandidateController::class, 'create'])->name('create');
+        Route::post('filter', [CandidateController::class, 'filter'])->name('filter');
+        Route::get('{recruitment:slug}/create', [CandidateController::class, 'create'])->name('create');
         Route::post('', [CandidateController::class, 'store'])->name('store');
         Route::get('edit/{candidate:slug}', [CandidateController::class, 'edit'])->name('edit');
         Route::put('{candidate:slug}', [CandidateController::class, 'update'])->name('update');

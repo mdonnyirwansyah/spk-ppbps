@@ -16,9 +16,9 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $recruitment = Recruitment::all();
+        $recruitments = Recruitment::all();
 
-        return view('app.report.index', compact('recruitment'));
+        return view('app.report.index', compact('recruitments'));
     }
 
     /**
