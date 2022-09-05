@@ -46,12 +46,12 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane fade show active">
-                <table id="weight-table" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+                <table id="weight-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th rowspan="2" style="vertical-align: middle;">No</th>
                             <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                            <th colspan="4" style="text-align: center;">Kriteria</th>
+                            <th colspan="{{ $recruitment->criterias->count() }}" style="text-align: center;">Kriteria</th>
                         </tr>
                         <tr>
                             @foreach ($recruitment->criterias as $criteria)

@@ -35,7 +35,7 @@
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Cetak</button>
             <hr>
-            <table id="report-table" class="table table-bordered table-striped dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="report-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th rowspan="2" style="vertical-align: middle;">Rank.</th>

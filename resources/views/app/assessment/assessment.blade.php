@@ -52,7 +52,7 @@
                         <tr>
                             <th rowspan="2" style="vertical-align: middle;">No</th>
                             <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                            <th colspan="4" style="text-align: center;">Kriteria</th>
+                            <th colspan="{{ $recruitment->criterias->count() }}" style="text-align: center;">Kriteria</th>
                             <th rowspan="2" style="vertical-align: middle;">Aksi</th>
                         </tr>
                         <tr>
