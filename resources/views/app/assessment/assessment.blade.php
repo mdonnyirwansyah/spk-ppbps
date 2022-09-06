@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Penilaian')
+@section('title', 'Filter Penilaian')
 
 @push('javascript')
 @include('app.assessment.actions')
@@ -19,21 +19,23 @@
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
-        <h1>{{ $recruitment->title }}</h1>
+        <h1>Penilaian</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </div>
             <div class="breadcrumb-item">
-                <a href="{{ route('assessment.index') }}">Penilaian</a>
+                <a href="{{ route('assessment.index') }}">Filter Penilaian</a>
             </div>
-            <div class="breadcrumb-item">{{ $recruitment->title }}</div>
+            <div class="breadcrumb-item">Penilaian</div>
         </div>
     </div>
   <div class="section-body">
     <div class="card">
       <div class="card-body">
         <div class="col-12">
+          <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
+          <hr>
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link active" aria-selected="true">Penilaian</a>

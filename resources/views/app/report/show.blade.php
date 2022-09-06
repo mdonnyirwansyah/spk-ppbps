@@ -18,22 +18,25 @@
                 <i class="fas fa-arrow-left"></i>
             </a>
         </div>
-        <h1>{{ $recruitment->title }}</h1>
+        <h1>Laporan</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </div>
             <div class="breadcrumb-item">
-                <a href="{{ route('report.index') }}">Laporan</a>
+                <a href="{{ route('report.index') }}">Filter Laporan</a>
             </div>
-            <div class="breadcrumb-item">{{ $recruitment->title }}</div>
+            <div class="breadcrumb-item">Laporan</div>
         </div>
     </div>
   <div class="section-body">
     <div class="card">
       <div class="card-body">
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Cetak</button>
+            <div class="d-flex justify-content-between">
+                <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
+                <button class="btn btn-primary" type="submit">Cetak</button>
+            </div>
             <hr>
             <table id="report-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>

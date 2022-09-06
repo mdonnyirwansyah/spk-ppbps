@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan')
+@section('title', 'Filter Laporan')
 
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Laporan</h1>
+    <h1>Filter Laporan</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active">
         <a href="{{ route('dashboard') }}">Dashboard</a>
       </div>
-      <div class="breadcrumb-item">Laporan</div>
+      <div class="breadcrumb-item">Filter Laporan</div>
     </div>
   </div>
   <div class="section-body">

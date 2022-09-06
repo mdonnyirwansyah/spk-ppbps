@@ -5,12 +5,12 @@
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Penilaian</h1>
+    <h1>Filter Penilaian</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active">
         <a href="{{ route('dashboard') }}">Dashboard</a>
       </div>
-      <div class="breadcrumb-item">Penilaian</div>
+      <div class="breadcrumb-item">Filter Penilaian</div>
     </div>
   </div>
   <div class="section-body">
