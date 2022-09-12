@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('', [ReportController::class, 'index'])->name('index');
         Route::post('filter', [ReportController::class, 'filter'])->name('filter');
         Route::get('{recruitment:slug}', [ReportController::class, 'show'])->name('show');
+        Route::get('print/{recruitment:slug}', [ReportController::class, 'print'])->name('print');
     });
 
     Route::prefix('account')->name('account.')->group(function () {

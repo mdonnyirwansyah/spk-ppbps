@@ -15,8 +15,8 @@ class CreateAssessmentsTable extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('candidate_id')->constrained('candidates', 'id')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreignId('criteria_id')->constrained('criterias', 'id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('candidate_id')->constrained('candidates', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('criteria_id')->constrained('criterias', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->float('weight');
             $table->timestamps();
         });

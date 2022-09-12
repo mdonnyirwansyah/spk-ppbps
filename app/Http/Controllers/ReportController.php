@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assessment;
 use App\Models\Recruitment;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,5 +50,21 @@ class ReportController extends Controller
         $sawResults = Assessment::dss_saw($recruitment->id);
 
         return view('app.report.show', compact('recruitment', 'sawResults'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recruitment  $recruitment
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Recruitment $recruitment)
+    {
+        $sawResults = Assessment::dss_saw($recruitment->id);
+        $fileName = (str_replace(' ', '-', strtolower('report-'.$recruitment->title.'.pdf')));
+        $pdf = Pdf::loadView('app.report.print', compact('recruitment', 'sawResults'))
+        ->setPaper('a4');
+
+        return $pdf->stream($fileName);
     }
 }

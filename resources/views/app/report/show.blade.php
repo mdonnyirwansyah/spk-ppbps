@@ -35,7 +35,7 @@
         <div class="col-12">
             <div class="d-flex justify-content-between">
                 <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
-                <button class="btn btn-primary" type="submit">Cetak</button>
+                <a href="{{ route('report.print', $recruitment) }}" target="_blank" class="btn btn-primary" type="submit">Cetak</a>
             </div>
             <hr>
             <table id="report-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -43,7 +43,7 @@
                     <tr>
                         <th rowspan="2" style="vertical-align: middle;">Rank.</th>
                         <th rowspan="2" style="vertical-align: middle;">Nama</th>
-                        <th colspan="4" style="text-align: center;">Kriteria</th>
+                        <th colspan="{{ $recruitment->criterias->count() }}" style="text-align: center;">Kriteria</th>
                         <th rowspan="2" style="vertical-align: middle;">Skor</th>
                         <th rowspan="2" style="vertical-align: middle;">Status</th>
                     </tr>
