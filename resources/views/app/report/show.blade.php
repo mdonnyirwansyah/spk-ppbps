@@ -6,6 +6,21 @@
 <script>
     $(document).ready( function() {
         $('#report-table').DataTable();
+        $('#btn-export').on('click', function() {
+            $('#btn-export').addClass('d-none')
+            $('#btn-pdf').removeClass('d-none');
+            $('#btn-excel').removeClass('d-none')
+        });
+        $('#btn-pdf').on('click', function() {
+            $('#btn-export').removeClass('d-none')
+            $('#btn-pdf').addClass('d-none');
+            $('#btn-excel').addClass('d-none')
+        });
+        $('#btn-excel').on('click', function() {
+            $('#btn-export').removeClass('d-none')
+            $('#btn-pdf').addClass('d-none');
+            $('#btn-excel').addClass('d-none')
+        });
     });
 </script>
 @endpush
@@ -33,9 +48,13 @@
     <div class="card">
       <div class="card-body">
         <div class="col-12">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column flex-md-row justify-content-between">
                 <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
-                <a href="{{ route('report.print', $recruitment) }}" target="_blank" class="btn btn-primary" type="submit">Cetak</a>
+                <div class="d-flex justify-content-end">
+                    <button id="btn-export" class="btn btn-primary">Cetak</button>
+                    <a id="btn-pdf" href="{{ route('report.export.pdf', $recruitment) }}" target="_blank" class="btn btn-danger d-none mr-3">PDF</a>
+                    <a id="btn-excel" href="{{ route('report.export.excel', $recruitment) }}" target="_blank" class="btn btn-success d-none">Excel</a>
+                </div>
             </div>
             <hr>
             <table id="report-table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">

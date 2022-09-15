@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AssessmentExport;
 use App\Models\Assessment;
 use App\Models\Recruitment;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -58,13 +60,26 @@ class ReportController extends Controller
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
-    public function print(Recruitment $recruitment)
+    public function pdf_export(Recruitment $recruitment)
     {
-        $sawResults = Assessment::dss_saw($recruitment->id);
         $fileName = (str_replace(' ', '-', strtolower('report-'.$recruitment->title.'.pdf')));
-        $pdf = Pdf::loadView('app.report.print', compact('recruitment', 'sawResults'))
+        $sawResults = Assessment::dss_saw($recruitment->id);
+        $pdf = Pdf::loadView('app.report.pdf', compact('recruitment', 'sawResults'))
         ->setPaper('a4');
 
         return $pdf->stream($fileName);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Recruitment  $recruitment
+     * @return \Illuminate\Http\Response
+     */
+    public function excel_export(Recruitment $recruitment)
+    {
+        $fileName = (str_replace(' ', '-', strtolower('report-'.$recruitment->title.'.xlsx')));
+
+        return Excel::download(new AssessmentExport($recruitment->id), $fileName);
     }
 }

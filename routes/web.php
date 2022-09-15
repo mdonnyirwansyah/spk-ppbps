@@ -80,7 +80,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('', [ReportController::class, 'index'])->name('index');
         Route::post('filter', [ReportController::class, 'filter'])->name('filter');
         Route::get('{recruitment:slug}', [ReportController::class, 'show'])->name('show');
-        Route::get('print/{recruitment:slug}', [ReportController::class, 'print'])->name('print');
+        Route::prefix('export')->name('export.')->group(function () {
+            Route::get('pdf/{recruitment:slug}', [ReportController::class, 'pdf_export'])->name('pdf');
+            Route::get('excel/{recruitment:slug}', [ReportController::class, 'excel_export'])->name('excel');
+        });
     });
 
     Route::prefix('account')->name('account.')->group(function () {
