@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CandidatesExport;
+use App\Imports\CandidateImport;
 use App\Models\Candidate;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 use function PHPSTORM_META\map;
@@ -68,7 +71,7 @@ class CandidateController extends Controller
         $slug = Str::slug($request->name);
         $countSlug = Candidate::where('slug', $slug)->count();
 
-        if ($countSlug > 1) {
+        if ($countSlug >= 1) {
             $slug = Str::slug($request->name.'-'.$countSlug);
         }
 
@@ -79,6 +82,27 @@ class CandidateController extends Controller
         ]);
 
         return redirect()->route('candidate.index')->with('success', 'Data baru berhasil ditambah!');
+    }
+
+    /**
+     * Import a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required',
+        ]);
+
+        if ($validator->passes()) {
+            Excel::import(new CandidateImport($request->recruitment), $request->file('file'));
+
+            return response()->json(['success' => 'Data baru berhasil diimport!']);
+        }
+
+        return response()->json(['error' => $validator->errors()]);
     }
 
     /**
@@ -127,7 +151,7 @@ class CandidateController extends Controller
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function updateStatus(Request $request, Candidate $candidate)
+    public function update_status(Request $request, Candidate $candidate)
     {
         $validator = Validator::make($request->all(), [
             'status' => 'required'
@@ -163,7 +187,7 @@ class CandidateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getData(Request $request)
+    public function get_all(Request $request)
     {
         $candidates = Candidate::where('recruitment_id', $request->recruitment)->get();
 
@@ -181,5 +205,15 @@ class CandidateController extends Controller
         })
         ->rawColumns(['action'])
         ->make(true);
+    }
+
+    public function export()
+    {
+        $export = new CandidatesExport([
+            ['Kandidat Satu'],
+            ['Kandidat Dua']
+        ]);
+
+        return Excel::download($export, 'candidates.xlsx');
     }
 }

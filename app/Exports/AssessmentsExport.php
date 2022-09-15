@@ -7,19 +7,19 @@ use App\Models\Recruitment;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class AssessmentExport implements FromView
+class AssessmentsExport implements FromView
 {
 
-    public function __construct(int $id)
+    public function __construct(int $recruitment)
     {
-        $this->id = $id;
+        $this->recruitment = $recruitment;
     }
 
     public function view(): View
     {
         return view('app.report.excel', [
-            'recruitment' => Recruitment::find($this->id),
-            'sawResults' => Assessment::dss_saw($this->id)
+            'recruitment' => Recruitment::find($this->recruitment),
+            'sawResults' => Assessment::dss_saw($this->recruitment)
         ]);
     }
 }

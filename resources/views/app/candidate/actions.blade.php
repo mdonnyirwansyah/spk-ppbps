@@ -18,7 +18,7 @@
                     success: function (response) {
                         if (response.success) {
                             $('#candidate-table').DataTable().draw();
-                            toastr.success(response.success, 'Selamat,');
+                            toastr.success(response.success, 'Pemberitahuan,');
                         } else {
                             swal(response.failed);
                         }

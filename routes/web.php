@@ -60,11 +60,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('filter', [CandidateController::class, 'filter'])->name('filter');
         Route::get('{recruitment:slug}/create', [CandidateController::class, 'create'])->name('create');
         Route::post('', [CandidateController::class, 'store'])->name('store');
+        Route::post('import', [CandidateController::class, 'import'])->name('import');
         Route::get('edit/{candidate:slug}', [CandidateController::class, 'edit'])->name('edit');
         Route::put('{candidate:slug}', [CandidateController::class, 'update'])->name('update');
-        Route::put('update-status/{candidate:slug}', [CandidateController::class, 'updateStatus'])->name('update-status');
+        Route::put('update-status/{candidate:slug}', [CandidateController::class, 'update_status'])->name('update-status');
         Route::delete('{candidate:slug}', [CandidateController::class, 'destroy'])->name('destroy');
-        Route::post('get-data', [CandidateController::class, 'getData'])->name('get-data');
+        Route::post('get-all', [CandidateController::class, 'get_all'])->name('get-all');
+        Route::get('export', [CandidateController::class, 'export'])->name('export');
     });
 
     Route::prefix('assessment')->name('assessment.')->group(function () {

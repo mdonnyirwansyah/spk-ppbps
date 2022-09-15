@@ -4,6 +4,21 @@
 
 @push('javascript')
     <script>
+        function printErrorMsg (msg) {
+            $.each( msg, function ( key, value ) {
+                $('#'+key).addClass('is-invalid');
+                $('.'+key+'_err').text(value);
+                $('#'+key).change(function () {
+                    $('#'+key).removeClass('is-invalid');
+                    $('#'+key).addClass('is-valid');
+                });
+            });
+        }
+
+        $('#collapse-import').on('click', function() {
+            $('#btn-excel').removeClass('d-none');
+        });
+
         $('#form-import').unbind().bind('submit', function (e) {
             e.preventDefault();
             $('#btn-import').attr('disabled', true);
@@ -20,11 +35,12 @@
                 },
                 success: function (response) {
                     if(response.success) {
+                        $('#form-import').trigger("reset");
                         toastr.success(response.success, 'Pemberitahuan,');
-                        $('#btn').attr('disabled', false);
+                        $('#btn-import').attr('disabled', false);
                     } else {
-                        swal('Pemberitahuan', response.error);
-                        $('#btn').attr('disabled', false);
+                        printErrorMsg(response.error);
+                        $('#btn-import').attr('disabled', false);
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -58,15 +74,16 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-end">
-                        <button class="btn btn-success" data-toggle="collapse" data-target="#import-excel" aria-expanded="false" aria-controls="import-excel">
-                            Import Excel
+                <div class="d-none card">
+                    <div class="card-body d-flex justify-content-end">
+                        <button id="collapse-import" class="btn btn-primary" data-toggle="collapse" data-target="#import" aria-expanded="false" aria-controls="import">
+                            Import
                         </button>
+                        <a id="btn-excel" href="{{ route('candidate.export') }}" target="_blank" class="btn btn-success d-none ml-3">File Import</a>
                     </div>
-                    <div class="card-body collapse" id="import-excel">
-                        <form id="form-import" method="POST" action="" enctype="multipart/form-data">
-                            @csrf
+                    <div class="card-body collapse" id="import">
+                        <form id="form-import" method="POST" action="{{ route('candidate.import') }}" enctype="multipart/form-data">
+                            <input type="hidden" name="recruitment" value="{{ $recruitment->id }}">
                             <div class="form-group row">
                               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                               <div class="col-sm-12 col-md-7">
@@ -74,12 +91,8 @@
                                     <div class="input-group-prepend">
                                         <button id="btn-import" class="btn btn-primary" type="submit">Import</button>
                                     </div>
-                                    <input type="file" class="form-control @error('file') is-invalid @enderror" name="file" />
-                                    @error('file')
-                                        <span class="invalid-feedback" role="alert">
-                                            <small>{{ $message }}</small>
-                                        </span>
-                                    @enderror
+                                    <input id="file" type="file" class="form-control" name="file" />
+                                    <small class="invalid-feedback file_err"></small>
                                 </div>
                               </div>
                             </div>

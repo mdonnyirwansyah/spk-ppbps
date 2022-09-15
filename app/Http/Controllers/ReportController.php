@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\AssessmentExport;
+use App\Exports\AssessmentsExport;
 use App\Models\Assessment;
 use App\Models\Recruitment;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -80,6 +80,6 @@ class ReportController extends Controller
     {
         $fileName = (str_replace(' ', '-', strtolower('report-'.$recruitment->title.'.xlsx')));
 
-        return Excel::download(new AssessmentExport($recruitment->id), $fileName);
+        return Excel::download(new AssessmentsExport($recruitment->id), $fileName);
     }
 }
