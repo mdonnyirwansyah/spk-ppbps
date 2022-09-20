@@ -3,6 +3,14 @@
 @section('title', 'Edit Kriteria')
 
 @push('javascript')
+@if ($message = Session::get('error'))
+  <script>
+      swal('Pemberitahuan', '{{ $message }}');
+  </script>
+@endif
+@endpush
+
+@push('javascript')
 <script>
     function printErrorMsg (msg) {
         $.each( msg, function ( key, value ) {

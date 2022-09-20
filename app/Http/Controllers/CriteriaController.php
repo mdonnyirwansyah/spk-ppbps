@@ -64,23 +64,24 @@ class CriteriaController extends Controller
             'weight' => 'required|numeric|gt:0'
         ]);
 
+        $weight = floatval($request->weight / 100);
         $slug = Str::slug($request->name.'-'.$request->recruitment);
         $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
 
         if ($isDuplicate) {
-            return response()->json(['failed' => 'Data sudah ada!']);
+            return redirect()->back()->with('error', 'Data sudah ada!');
         } else {
             $limit = 1;
-            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') + $request->weight;
+            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') + $weight;
             $isWeightOverLimit = $totalWeight > $limit ? true : false;
             if ($isWeightOverLimit) {
-                return response()->json(['warning' => 'Bobot melebihi batas!']);
+                return redirect()->back()->with('error', 'Bobot melebihi batas!');
             } else {
                 Criteria::create([
                     'recruitment_id' => $request->recruitment,
                     'name' => $request->name,
                     'type' => $request->type,
-                    'weight' => floatval($request->weight),
+                    'weight' => $weight,
                     'slug' => $slug
                 ]);
 
@@ -114,23 +115,24 @@ class CriteriaController extends Controller
             'weight' => 'required|numeric',
         ]);
 
+        $weight = floatval($request->weight / 100);
         $slug = Str::slug($request->name.'-'.$request->recruitment);
         $isDuplicate = Criteria::where('slug', $slug)->first() ? true : false;
 
         if ($isDuplicate && $criteria->weight == $request->weight) {
-            return response()->json(['failed' => 'Data sudah ada!']);
+            return redirect()->back()->with('error', 'Data sudah ada!');
         } else {
             $limit = 1;
-            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') - $criteria->weight + $request->weight;
+            $totalWeight = Criteria::where('recruitment_id', $request->recruitment)->sum('weight') - $criteria->weight + $weight;
             $isWeightOverLimit = $totalWeight > $limit ? true : false;
             if ($isWeightOverLimit) {
-                return response()->json(['warning' => 'Bobot melebihi batas!']);
+                return redirect()->back()->with('error', 'Bobot melebihi batas!');
             } else {
                 $criteria->update([
                     'recruitment_id' => $request->recruitment,
                     'name' => $request->name,
                     'type' => $request->type,
-                    'weight' => floatval($request->weight),
+                    'weight' => $weight,
                     'slug' => $slug
                 ]);
 

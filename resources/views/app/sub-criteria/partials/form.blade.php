@@ -29,7 +29,7 @@
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="name">Nama</label>
   <div class="col-sm-12 col-md-7">
-      <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" @isset($subCriteria) value="{{ old('name') ?? $subCriteria->name }}" @endisset />
+      <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $subCriteria->name ?? '' }}" />
       @error('name')
         <span class="invalid-feedback" role="alert">
             <small>{{ $message }}</small>
@@ -43,11 +43,11 @@
     <div class="col-sm-12 col-md-7">
       <select id="rating" class="form-control @error('rating') is-invalid @enderror" style="width: 100%" name="rating">
             <option selected disabled>Pilih Rating</option>
-            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Tinggi' ? 'selected' : '') }} @endisset value="Sangat Tinggi">Sangat Tinggi</option>
-            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Tinggi' ? 'selected' : '') }} @endisset value="Tinggi">Tinggi</option>
-            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Cukup' ? 'selected' : '') }} @endisset value="Cukup">Cukup</option>
-            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Rendah' ? 'selected' : '') }} @endisset value="Rendah">Rendah</option>
-            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Rendah' ? 'selected' : '') }} @endisset value="Sangat Rendah">Sangat Rendah</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Tinggi' ? 'selected' : '') }} @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Sangat Tinggi' && $subCriteria->rating != 'Sangat Tinggi' ? 'disabled' : '') }} @endforeach @else @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Sangat Tinggi' ? 'disabled' : '') }} @endforeach @endisset value="Sangat Tinggi">Sangat Tinggi</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Tinggi' ? 'selected' : '') }} @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Tinggi' && $subCriteria->rating != 'Tinggi' ? 'disabled' : '') }} @endforeach @else @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Tinggi' ? 'disabled' : '') }} @endforeach @endisset value="Tinggi">Tinggi</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Cukup' ? 'selected' : '') }} @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Cukup' && $subCriteria->rating != 'Cukup' ? 'disabled' : '') }} @endforeach @else @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Cukup' ? 'disabled' : '') }} @endforeach @endisset value="Cukup">Cukup</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Rendah' ? 'selected' : '') }} @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Rendah' && $subCriteria->rating != 'Rendah' ? 'disabled' : '') }} @endforeach @else @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Rendah' ? 'disabled' : '') }} @endforeach @endisset value="Rendah">Rendah</option>
+            <option @isset($subCriteria) {{ ($subCriteria->rating == 'Sangat Rendah' ? 'selected' : '') }} @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Sangat Rendah' && $subCriteria->rating != 'Sangat Rendah' ? 'disabled' : '') }} @endforeach @else @foreach ($criteria->sub_criterias as $key) {{ ($key->rating == 'Sangat Rendah' ? 'disabled' : '') }} @endforeach @endisset value="Sangat Rendah">Sangat Rendah</option>
       </select>
       @error('rating')
         <span class="invalid-feedback" role="alert">

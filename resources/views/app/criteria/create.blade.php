@@ -2,6 +2,14 @@
 
 @section('title', 'Tambah Kriteria')
 
+@push('javascript')
+@if ($message = Session::get('error'))
+  <script>
+      swal('Pemberitahuan', '{{ $message }}');
+  </script>
+@endif
+@endpush
+
 @section('content')
 <section class="section">
     <div class="section-header">

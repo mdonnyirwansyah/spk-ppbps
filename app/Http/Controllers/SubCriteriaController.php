@@ -94,7 +94,7 @@ class SubCriteriaController extends Controller
         }
 
         $slug = Str::slug($request->name.'-'.$request->criteria);
-        $isDuplicate = SubCriteria::where('slug', $slug)->first() || SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->first() ? true : false;
+        $isDuplicate = SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->first() ? true : false;
 
         if ($isDuplicate) {
             return redirect()->back()->with('error', 'Data sudah ada!');
@@ -119,7 +119,7 @@ class SubCriteriaController extends Controller
      */
     public function edit(SubCriteria $subCriteria)
     {
-        $criteria = Criteria::all();
+        $criteria = Criteria::find($subCriteria->criteria_id);
 
         return view('app.sub-criteria.edit', compact('subCriteria', 'criteria'));
     }
@@ -167,7 +167,7 @@ class SubCriteriaController extends Controller
         }
 
         $slug = Str::slug($request->name.'-'.$request->criteria);
-        $isDuplicate = SubCriteria::where('criteria_id', $request->criteria)->where('rating', $request->rating)->count() > 1 ? true : false;
+        $isDuplicate = SubCriteria::where('id', '!=', $subCriteria->id)->where('criteria_id', $request->criteria)->where('rating', $request->rating)->count() >= 1 ? true : false;
 
         if ($isDuplicate) {
             return redirect()->back()->with('error', 'Data sudah ada!');

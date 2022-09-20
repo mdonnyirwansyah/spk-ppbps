@@ -22,12 +22,14 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success:function (response) {
-                    $('#criteria').attr('disabled', false);
-                    $('#criteria').empty();
-                    $('#criteria').append('<option>Pilih Kriteria</option>');
-                    $.each(response.criterias, function(index, criteria) {
-                        $('#criteria').append('<option value="'+criteria.id+'">'+criteria.name+'</option>');
-                    })
+                    if (response.criterias.length > 0) {
+                        $('#criteria').attr('disabled', false);
+                        $('#criteria').empty();
+                        $('#criteria').append('<option selected disabled>Pilih Kriteria</option>');
+                        $.each(response.criterias, function(index, criteria) {
+                            $('#criteria').append('<option value="'+criteria.id+'">'+criteria.name+'</option>');
+                        });
+                    }
                 }
             });
         });
@@ -115,7 +117,7 @@
                               <small>{{ $message }}</small>
                           </span>
                       @enderror
-                      <select class="custom-select @error('recruitment') is-invalid @enderror" name="criteria" id="criteria" disabled>
+                      <select class="custom-select @error('criteria') is-invalid @enderror" name="criteria" id="criteria" disabled>
                           <option selected disabled>Pilih Kriteria</option>
                       </select>
                       @error('criteria')

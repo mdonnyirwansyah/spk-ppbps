@@ -16,7 +16,7 @@
 <div class="form-group row mb-4">
   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" for="name">Nama</label>
   <div class="col-sm-12 col-md-7">
-      <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" @isset($candidate) value="{{ old('name') ?? $candidate->name }}" @endisset />
+      <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $candidate->name ?? '' }}" />
       @error('name')
         <span class="invalid-feedback" role="alert">
             <small>{{ $message }}</small>
