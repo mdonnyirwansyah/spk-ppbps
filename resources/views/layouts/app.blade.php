@@ -2,18 +2,22 @@
 
 @section('body')
 <div class="main-wrapper">
-  <div class="navbar-bg"></div>
-  <nav class="navbar navbar-expand-lg main-navbar">
-    @include('partials.topnav')
-  </nav>
-  <div class="main-sidebar">
+  <header>
+    <div class="navbar-bg"></div>
+    <nav class="navbar navbar-expand-lg main-navbar">
+        @include('partials.topnav')
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
     @include('partials.sidebar')
-  </div>
+  </aside>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <main class="main-content">
     @yield('content')
-  </div>
+  </main>
+
   <footer class="main-footer">
     @include('partials.footer')
   </footer>

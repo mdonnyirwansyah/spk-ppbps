@@ -35,7 +35,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('sub-criteria.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('sub-criteria.store') }}" enctype="multipart/form-data" autocomplete="off">
                             @include('app.sub-criteria.partials.form')
                         </form>
                     </div>

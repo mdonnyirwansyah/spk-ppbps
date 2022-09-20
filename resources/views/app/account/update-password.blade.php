@@ -5,7 +5,7 @@
 @push('javascript')
 @if(session()->has('status'))
 <script>
-  toastr.success("{{ __('Password has been updated') }}", 'Congratulations,');
+  toastr.success("{{ __('Password berhasil diperbarui') }}", 'Pemberitahuan,');
 </script>
 @endif
 @endpush

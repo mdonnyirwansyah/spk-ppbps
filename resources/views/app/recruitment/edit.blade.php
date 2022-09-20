@@ -27,7 +27,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('recruitment.update', $recruitment) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('recruitment.update', $recruitment) }}" enctype="multipart/form-data" autocomplete="off">
                             @method('PUT')
                             @include('app.recruitment.partials.form')
                         </form>

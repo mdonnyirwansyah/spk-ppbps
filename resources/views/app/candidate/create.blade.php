@@ -82,7 +82,7 @@
                         <a id="btn-excel" href="{{ route('candidate.export') }}" target="_blank" class="btn btn-success d-none ml-3">File Import</a>
                     </div>
                     <div class="card-body collapse" id="import">
-                        <form id="form-import" method="POST" action="{{ route('candidate.import') }}" enctype="multipart/form-data">
+                        <form id="form-import" method="POST" action="{{ route('candidate.import') }}" enctype="multipart/form-data" autocomplete="off">
                             <input type="hidden" name="recruitment" value="{{ $recruitment->id }}">
                             <div class="form-group row">
                               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
@@ -99,9 +99,10 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('candidate.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('candidate.store') }}" enctype="multipart/form-data" autocomplete="off">
                             @include('app.candidate.partials.form')
                         </form>
                     </div>

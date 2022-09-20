@@ -87,7 +87,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('criteria.update', $criteria) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('criteria.update', $criteria) }}" enctype="multipart/form-data" autocomplete="off">
                             @method('PUT')
                             @include('app.criteria.partials.form')
                         </form>

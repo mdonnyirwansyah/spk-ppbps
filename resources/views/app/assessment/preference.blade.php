@@ -34,7 +34,7 @@
     <div class="card">
       <div class="card-body">
         <div class="col-12">
-          <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
+          <h2 style="font-size: 18px; color: #34395e">{{ $recruitment->title }}</h2>
           <hr>
           <ul class="nav nav-tabs">
             <li class="nav-item">

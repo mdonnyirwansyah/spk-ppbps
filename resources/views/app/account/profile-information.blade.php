@@ -5,7 +5,7 @@
 @push('javascript')
 @if(session()->has('status'))
 <script>
-  toastr.success("{{ __('Informasi Profil has been updated') }}", 'Congratulations,');
+  toastr.success("{{ __('Informasi Profil berhasil diperbarui') }}", 'Pemberitahuan,');
 </script>
 @endif
 @endpush
@@ -58,7 +58,7 @@
               <div class="form-group row align-items-center">
                 <label for="email" class="form-control-label col-sm-3 text-md-right">Email</label>
                 <div class="col-sm-6 col-md-9">
-                  <input type="text" name="email" class="form-control @error('email', 'updateProfileInformation') is-invalid @enderror" id="email" value="{{ old('email') ?? Auth::user()->email }}">
+                  <input type="email" name="email" class="form-control @error('email', 'updateProfileInformation') is-invalid @enderror" id="email" value="{{ old('email') ?? Auth::user()->email }}">
                   @error('email', 'updateProfileInformation')
                   <span class="invalid-feedback" role="alert">
                       <small>{{ $message }}</small>

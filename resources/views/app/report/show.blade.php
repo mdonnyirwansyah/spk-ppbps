@@ -49,7 +49,7 @@
       <div class="card-body">
         <div class="col-12">
             <div class="d-flex flex-column flex-md-row justify-content-between">
-                <h2 style="font-size: 1.4em">{{ $recruitment->title }}</h2>
+                <h2 style="font-size: 18px; color: #34395e">{{ $recruitment->title }}</h2>
                 <div class="d-flex justify-content-end">
                     <button id="btn-export" class="btn btn-primary">Cetak</button>
                     <a id="btn-pdf" href="{{ route('report.export.pdf', $recruitment) }}" target="_blank" class="btn btn-danger d-none mr-3">PDF</a>

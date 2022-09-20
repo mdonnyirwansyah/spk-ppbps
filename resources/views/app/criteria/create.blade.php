@@ -27,7 +27,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('criteria.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('criteria.store') }}" enctype="multipart/form-data" autocomplete="off">
                             @include('app.criteria.partials.form')
                         </form>
                     </div>
