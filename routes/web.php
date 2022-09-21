@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{criteria:slug}', [CriteriaController::class, 'edit'])->name('edit');
         Route::put('{criteria:slug}', [CriteriaController::class, 'update'])->name('update');
         Route::delete('{criteria:slug}', [CriteriaController::class, 'destroy'])->name('destroy');
-        Route::post('get-data', [CriteriaController::class, 'getData'])->name('get-data');
+        Route::post('get-all', [CriteriaController::class, 'get_all'])->name('get-all');
     });
 
     Route::prefix('sub-criteria')->name('sub-criteria.')->group(function () {
@@ -51,8 +51,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{sub_criteria:slug}', [SubCriteriaController::class, 'edit'])->name('edit');
         Route::put('{sub_criteria:slug}', [SubCriteriaController::class, 'update'])->name('update');
         Route::delete('{sub_criteria:slug}', [SubCriteriaController::class, 'destroy'])->name('destroy');
-        Route::post('get-data', [SubCriteriaController::class, 'getData'])->name('get-data');
-        Route::post('get-criteria', [SubCriteriaController::class, 'getCriteria'])->name('get-criteria');
+        Route::post('get-all', [SubCriteriaController::class, 'get_all'])->name('get-all');
+        Route::post('get-criteria', [SubCriteriaController::class, 'get_criteria'])->name('get-criteria');
     });
 
     Route::prefix('candidate')->name('candidate.')->group(function () {

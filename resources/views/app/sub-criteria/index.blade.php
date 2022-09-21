@@ -43,7 +43,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('sub-criteria.get-data') }}",
+                url: "{{ route('sub-criteria.get-all') }}",
                 type: "POST",
                 data: function (d) {
                     d.criteria = $('#criteria').val();

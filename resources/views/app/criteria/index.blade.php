@@ -16,7 +16,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('criteria.get-data') }}",
+                url: "{{ route('criteria.get-all') }}",
                 type: "POST",
                 data: function (d) {
                     d.recruitment = $('#recruitment').val();

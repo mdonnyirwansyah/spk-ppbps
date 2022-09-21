@@ -12,8 +12,6 @@ use Yajra\DataTables\Facades\DataTables;
 class SubCriteriaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -24,8 +22,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,8 +38,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Criteria  $criteria
      * @return \Illuminate\Http\Response
      */
@@ -53,8 +47,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -112,8 +104,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param  \App\Models\SubCriteria  $subCriteria
      * @return \Illuminate\Http\Response
      */
@@ -125,8 +115,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\SubCriteria  $subCriteria
      * @return \Illuminate\Http\Response
@@ -185,8 +173,6 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param  \App\Models\SubCriteria  $subCriteria
      * @return \Illuminate\Http\Response
      */
@@ -198,12 +184,10 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getData(Request $request)
+    public function get_all(Request $request)
     {
         $subCriterias = SubCriteria::where('criteria_id', $request->criteria)->get();
 
@@ -224,12 +208,10 @@ class SubCriteriaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getCriteria(Request $request)
+    public function get_criteria(Request $request)
     {
         $criterias = Criteria::where('recruitment_id', $request->recruitment)->get();
 

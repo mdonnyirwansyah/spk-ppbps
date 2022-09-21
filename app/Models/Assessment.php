@@ -23,7 +23,7 @@ class Assessment extends Model
         return $this->belongsTo(Recruitment::class);
     }
 
-    public static function getMaxMin($criterias)
+    public static function get_max_min($criterias)
     {
         $arr=[];
         foreach ($criterias as $key => $criteria) {
@@ -44,7 +44,7 @@ class Assessment extends Model
         $candidates = Candidate::where('recruitment_id', $recruitment)->orderBy('name','Asc')->has('assessments')->with('assessments')->get();
         $arr = [];
         $score=[];
-        $minmax =  self::getMaxMin($criterias);
+        $minmax =  self::get_max_min($criterias);
 
         foreach($candidates as $index => $candidate) {
             $arr[$index] = [

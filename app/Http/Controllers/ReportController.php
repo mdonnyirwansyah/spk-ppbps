@@ -13,8 +13,6 @@ use Maatwebsite\Excel\Facades\Excel;
 class ReportController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -25,8 +23,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,8 +38,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
@@ -55,8 +49,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
@@ -71,8 +63,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */

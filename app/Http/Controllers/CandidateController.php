@@ -17,8 +17,6 @@ use function PHPSTORM_META\map;
 class CandidateController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -29,8 +27,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -46,8 +42,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Recruitment  $recruitment
      * @return \Illuminate\Http\Response
      */
@@ -57,8 +51,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -85,8 +77,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Import a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -106,8 +96,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
@@ -117,8 +105,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
@@ -145,8 +131,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
@@ -169,8 +153,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
@@ -182,8 +164,6 @@ class CandidateController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -207,6 +187,9 @@ class CandidateController extends Controller
         ->make(true);
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function export()
     {
         $export = new CandidatesExport([
