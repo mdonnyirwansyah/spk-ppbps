@@ -10,23 +10,21 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-free": "^5.10.2",
-        "axios": "^0.21",
-        "bootstrap": "^4.3.1",
-        "jquery": "^3.4",
-        "jquery.nicescroll": "^3.7",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "moment": "^2.24",
-        "popper.js": "^1.14",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.52.0",
         "sass-loader": "^12.6.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.10.2",
+        "bootstrap": "^4.3.1",
         "datatables.net-bs4": "^1.12.1",
         "datatables.net-responsive-bs4": "^2.3.0",
+        "jquery": "^3.4",
+        "jquery.nicescroll": "^3.7",
+        "popper.js": "^1.14",
         "sweetalert": "^2.1.2",
         "toastr": "^2.1.4"
     }
