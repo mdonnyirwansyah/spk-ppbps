@@ -5,7 +5,7 @@
 @push('javascript')
 @if(session()->has('status'))
 <script>
-  toastr.success("{{ __('Informasi Profil berhasil diperbarui') }}", 'Pemberitahuan,');
+  toastr.success("{{ __('Informasi profil berhasil diperbarui!') }}", 'Pemberitahuan,');
 </script>
 @endif
 @endpush
