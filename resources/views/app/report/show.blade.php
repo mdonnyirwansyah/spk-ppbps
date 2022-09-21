@@ -6,20 +6,23 @@
 <script>
     $(document).ready( function() {
         $('#report-table').DataTable();
+
         $('#btn-export').on('click', function() {
-            $('#btn-export').addClass('d-none')
+            $('#btn-export').addClass('d-none');
             $('#btn-pdf').removeClass('d-none');
-            $('#btn-excel').removeClass('d-none')
+            $('#btn-excel').removeClass('d-none');
         });
+
         $('#btn-pdf').on('click', function() {
-            $('#btn-export').removeClass('d-none')
+            $('#btn-export').removeClass('d-none');
             $('#btn-pdf').addClass('d-none');
-            $('#btn-excel').addClass('d-none')
+            $('#btn-excel').addClass('d-none');
         });
+
         $('#btn-excel').on('click', function() {
-            $('#btn-export').removeClass('d-none')
+            $('#btn-export').removeClass('d-none');
             $('#btn-pdf').addClass('d-none');
-            $('#btn-excel').addClass('d-none')
+            $('#btn-excel').addClass('d-none');
         });
     });
 </script>

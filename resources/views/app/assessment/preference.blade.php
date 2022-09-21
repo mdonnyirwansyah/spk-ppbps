@@ -3,11 +3,41 @@
 @section('title', 'Preferensi')
 
 @push('javascript')
-@include('app.assessment.actions')
 <script>
     $(document).ready( function() {
         $('#preference-table').DataTable();
     });
+
+    function updateStatus(id) {
+        $('#update-status-' + id).unbind().bind('submit', function (e) {
+            e.preventDefault();
+            $('#btn').attr('disabled', true);
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if(response.success) {
+                        toastr.success(response.success, 'Pemberitahuan,');
+                        $('#btn').attr('disabled', false);
+                    } else {
+                        swal('Pemberitahuan', response.error);
+                        $('#btn').attr('disabled', false);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + '\n' + xhr.responseText + '\n' + thrownError);
+                }
+            });
+        });
+    }
 </script>
 @endpush
 
