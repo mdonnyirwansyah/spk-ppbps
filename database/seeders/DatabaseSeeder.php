@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RecruitmentSeeder::class,
             CriteriaSeeder::class,
             SubCriteriaSeeder::class,
-            CandidateSeeder::class
+            // CandidateSeeder::class
         ]);
     }
 }

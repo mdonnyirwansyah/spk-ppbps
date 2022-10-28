@@ -15,8 +15,8 @@ class CreateRecruitmentsTable extends Migration
     {
         Schema::create('recruitments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title', '64');
+            $table->string('slug', '128');
             $table->timestamps();
         });
     }

@@ -2,11 +2,14 @@
 
 namespace App\Imports;
 
+use App\Models\Assessment;
 use App\Models\Candidate;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Str;
 
-class CandidateImport implements ToModel
+class CandidateImport implements ToCollection
 {
 
     public function __construct(int $recruitment)
@@ -14,24 +17,52 @@ class CandidateImport implements ToModel
         $this->recruitment = $recruitment;
     }
 
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        $slug = Str::slug($row[0]);
-        $countSlug = Candidate::where('slug', $slug)->count();
+        foreach ($rows as $key => $row)
+        {
+            $slug = Str::slug($row[0]);
+            $countSlug = Candidate::where('slug', $slug)->count();
 
-        if ($countSlug >= 1) {
-            $slug = Str::slug($row[0].'-'.$countSlug);
+            if ($countSlug >= 1) {
+                $slug = Str::slug($row[0].'-'.$countSlug);
+            }
+
+            DB::transaction(function() use ($key, $row, $slug) {
+                Candidate::create([
+                    'recruitment_id' => $this->recruitment,
+                    'name' => $row[0],
+                    'slug' => $slug
+                ]);
+
+                Assessment::updateOrCreate([
+                    'candidate_id' => $key+1,
+                    'criteria_id' => 1,
+                ], [
+                    'weight' => $row[1]
+                ]);
+
+                Assessment::updateOrCreate([
+                    'candidate_id' => $key+1,
+                    'criteria_id' => 2,
+                ], [
+                    'weight' => $row[2]
+                ]);
+
+                Assessment::updateOrCreate([
+                    'candidate_id' => $key+1,
+                    'criteria_id' => 3,
+                ], [
+                    'weight' => $row[3]
+                ]);
+
+                Assessment::updateOrCreate([
+                    'candidate_id' => $key+1,
+                    'criteria_id' => 4,
+                ], [
+                    'weight' => $row[4]
+                ]);
+            });
         }
-
-        return new Candidate([
-            'recruitment_id' => $this->recruitment,
-            'name' => $row[0],
-            'slug' => $slug
-        ]);
     }
 }

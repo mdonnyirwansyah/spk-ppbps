@@ -20,7 +20,12 @@ class CandidateSeeder extends Seeder
             ['recruitment_id' => 4, 'name' => 'Ade Indrayadi Pulungan'],
             ['recruitment_id' => 4, 'name' => 'Siti Hafsah'],
             ['recruitment_id' => 4, 'name' => 'Vela Yunita'],
-            ['recruitment_id' => 4, 'name' => 'Vieny Meiliani']
+            ['recruitment_id' => 4, 'name' => 'Vieny Meiliani'],
+            ['recruitment_id' => 4, 'name' => 'Vina Ika Ratma'],
+            ['recruitment_id' => 4, 'name' => 'Wiwik Widiawati'],
+            ['recruitment_id' => 4, 'name' => 'Yandrizon'],
+            ['recruitment_id' => 4, 'name' => 'Yopa Surayati'],
+            ['recruitment_id' => 4, 'name' => 'Zaipul']
         ]);
 
         $candidate->each( function ($item) {

@@ -16,10 +16,10 @@ class CreateCriteriasTable extends Migration
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recruitment_id')->nullable()->constrained('recruitments', 'id')->onUpdate('cascade')->onDelete('restrict');
-            $table->string('name');
+            $table->string('name', '128');
             $table->enum('type', ['Cost', 'Benefit']);
             $table->float('weight');
-            $table->string('slug');
+            $table->string('slug', '128');
             $table->timestamps();
         });
     }
