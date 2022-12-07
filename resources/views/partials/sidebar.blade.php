@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{{ route('criteria.index') }}">Kriteria</a>
               </li>
               <li class="dropdown {{ request()->routeIs('sub-criteria.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('sub-criteria.index') }}">Sub-Kriteria</a>
+                <a class="nav-link" href="{{ route('sub-criteria.index') }}">Sub Kriteria</a>
               </li>
             </ul>
         </li>

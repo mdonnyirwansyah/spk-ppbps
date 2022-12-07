@@ -57,24 +57,24 @@ class Assessment extends Model
                  foreach($candidate->assessments as $assessment) {
                     if($assessment->criteria_id==$criteria->id) {
                         $arr[$index]['criteria'][$criteria->id] = [
-                            'name'=>$criteria->name,
-                            'type'=>$criteria->type,
-                            'weight'=>$assessment->weight,
+                            'name' => $criteria->name,
+                            'type' => $criteria->type,
+                            'weight' => $assessment->weight,
                         ];
 
                         if ($criteria->type=='Benefit') {
-                            $result=$assessment->weight/$minmax[$criteria->id]['max_weight'];
+                            $result = $assessment->weight / $minmax[$criteria->id]['max_weight'];
                         } else if ($criteria->type=='Cost') {
-                            $result=$minmax[$criteria->id]['min_weight']/$assessment->weight;
+                            $result = $minmax[$criteria->id]['min_weight'] / $assessment->weight;
                         }
 
-                        $arr[$index]['criteria'][$criteria->id]['result'] = $result;
-                        $score[$index][] = $result*$criteria->weight;
+                        $arr[$index]['criteria'][$criteria->id]['result'] = number_format($result, 2, '.', '');
+                        $score[$index][] = $result * $criteria->weight;
                     }
                 }
             }
 
-            $arr[$index]['score'] = array_sum($score[$index]);
+            $arr[$index]['score'] = number_format(array_sum($score[$index]), 4, '.', '');
         }
 
         foreach ($arr as $key => $row)
