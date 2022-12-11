@@ -25,7 +25,7 @@ class SubCriteriaSeeder extends Seeder
             ['criteria_id' => 2, 'name' => 'Tamat SLTA/Sederajat', 'rating' => 'Rendah', 'weight' => 2],
             ['criteria_id' => 2, 'name' => 'Tamat DI/D-II/D-III', 'rating' => 'Cukup', 'weight' => 3],
             ['criteria_id' => 2, 'name' => 'Tamat S-I/D-IV', 'rating' => 'Tinggi', 'weight' => 4],
-            ['criteria_id' => 2, 'name' => 'Tamat S-II/S-III', 'rating' => 'Sangat Tinggi', 'weight' => 5],
+            ['criteria_id' => 2, 'name' => 'Tamat S-2/S-3', 'rating' => 'Sangat Tinggi', 'weight' => 5],
             ['criteria_id' => 3, 'name' => '0', 'rating' => 'Sangat Rendah', 'weight' => 1],
             ['criteria_id' => 3, 'name' => '1', 'rating' => 'Rendah', 'weight' => 2],
             ['criteria_id' => 3, 'name' => '2', 'rating' => 'Cukup', 'weight' => 3],
