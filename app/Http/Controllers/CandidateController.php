@@ -193,8 +193,7 @@ class CandidateController extends Controller
     public function export()
     {
         $export = new CandidatesExport([
-            ['Kandidat Satu'],
-            ['Kandidat Dua']
+            ['Id Kandidat (Wajib Angka Unik)', 'Nama Kandidat', 'Kriteria 1 Kandidat', 'Kriteria 2 Kandidat', 'Kriteria dst.']
         ]);
 
         return Excel::download($export, 'candidates.xlsx');

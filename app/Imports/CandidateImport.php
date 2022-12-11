@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Assessment;
 use App\Models\Candidate;
+use App\Models\Recruitment;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -35,33 +36,17 @@ class CandidateImport implements ToCollection
                     'slug' => $slug
                 ]);
 
-                Assessment::updateOrCreate([
-                    'candidate_id' => $key+1,
-                    'criteria_id' => 1,
-                ], [
-                    'weight' => $row[1]
-                ]);
+                $recruitment = Recruitment::find($this->recruitment);
+                $criterias = $recruitment->criterias()->get();
 
-                Assessment::updateOrCreate([
-                    'candidate_id' => $key+1,
-                    'criteria_id' => 2,
-                ], [
-                    'weight' => $row[2]
-                ]);
-
-                Assessment::updateOrCreate([
-                    'candidate_id' => $key+1,
-                    'criteria_id' => 3,
-                ], [
-                    'weight' => $row[3]
-                ]);
-
-                Assessment::updateOrCreate([
-                    'candidate_id' => $key+1,
-                    'criteria_id' => 4,
-                ], [
-                    'weight' => $row[4]
-                ]);
+                foreach ($criterias as $index => $criteria) {
+                    Assessment::updateOrCreate([
+                        'candidate_id' => $row[0],
+                        'criteria_id' => $criteria->id,
+                    ], [
+                        'weight' => $row[$index + 2]
+                    ]);
+                }
             });
         }
     }
