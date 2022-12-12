@@ -38,6 +38,14 @@
                         $('#form-import').trigger("reset");
                         toastr.success(response.success, 'Pemberitahuan,');
                         $('#btn-import').attr('disabled', false);
+                    } else if(response.failed) {
+                        $('#form-import').trigger("reset");
+                        let errors = response.failed.map((error) => {
+                            return `Id ${error.value} pada row ${error.row} ${error.error}`
+                        });
+                        let error = errors.join();
+                        swal('Pemberitahuan', error);
+                        $('#btn-import').attr('disabled', false);
                     } else {
                         printErrorMsg(response.error);
                         $('#btn-import').attr('disabled', false);
@@ -74,7 +82,7 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
-                <div class="d-none card">
+                <div class="card">
                     <div class="card-body d-flex justify-content-end">
                         <button id="collapse-import" class="btn btn-primary" data-toggle="collapse" data-target="#import" aria-expanded="false" aria-controls="import">
                             Import

@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
-use function PHPSTORM_META\map;
-
 class CandidateController extends Controller
 {
     /**
@@ -86,10 +84,24 @@ class CandidateController extends Controller
             'file' => 'required',
         ]);
 
-        if ($validator->passes()) {
-            Excel::import(new CandidateImport($request->recruitment), $request->file('file'));
+        $failed = [];
 
-            return response()->json(['success' => 'Data baru berhasil diimport!']);
+        if ($validator->passes()) {
+            try {
+                Excel::import(new CandidateImport($request->recruitment), $request->file('file'));
+
+                return response()->json(['success' => 'Data baru berhasil diimport!']);
+            } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                $failures = $e->failures();
+                foreach ($failures as $index => $failure) {
+                    $failed[$index] = [
+                        'row' => $failure->row(),
+                        'value' => $failure->values()[0],
+                        'error' => $failure->errors()
+                    ];
+                }
+                return response()->json(['failed' => $failed]);
+            }
         }
 
         return response()->json(['error' => $validator->errors()]);
