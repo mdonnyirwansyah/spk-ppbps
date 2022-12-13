@@ -9,6 +9,7 @@ use App\Models\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class AssessmentController extends Controller
 {
@@ -116,8 +117,12 @@ class AssessmentController extends Controller
      */
     public function preference(Recruitment $recruitment)
     {
-        $sawResults = Assessment::dss_saw($recruitment->id);
+        try {
+            $sawResults = Assessment::dss_saw($recruitment->id);
 
-        return view('app.assessment.preference', compact('recruitment', 'sawResults'));
+            return view('app.assessment.preference', compact('recruitment', 'sawResults'));
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', 'Halaman Preferensi tidak bisa diakses jika ada data kandidat yang belum dinilai, silahkan cek kembali data kandidat yang belum dinilai!');;
+        }
     }
 }

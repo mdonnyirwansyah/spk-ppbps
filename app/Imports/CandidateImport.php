@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class CandidateImport implements ToCollection, WithValidation
+class CandidateImport implements ToCollection, WithValidation, SkipsOnError
 {
+    use Importable, SkipsErrors;
 
     public function __construct(int $recruitment)
     {
@@ -57,12 +61,8 @@ class CandidateImport implements ToCollection, WithValidation
     public function rules(): array
     {
         return [
-             '0' => Rule::unique('candidates', 'id')
+             '0' => Rule::unique('candidates', 'id'),
+             '1' => 'required'
         ];
-    }
-
-    public function customValidationAttributes()
-    {
-        return ['0' => ''];
     }
 }

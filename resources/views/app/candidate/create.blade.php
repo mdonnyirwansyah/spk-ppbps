@@ -41,10 +41,12 @@
                     } else if(response.failed) {
                         $('#form-import').trigger("reset");
                         let errors = response.failed.map((error) => {
-                            return `Id ${error.value} pada row ${error.row} ${error.error}`
+                            return `Data pada baris ${error.row} di kolom ${error.attribute} ${error.error}`
                         });
-                        let error = errors.join();
-                        swal('Pemberitahuan', error);
+                        let error = errors.join('<br>');
+                        let text = document.createElement("p");
+                        text.innerHTML = error;
+                        swal({title : 'Pemberitahuan', content: text});
                         $('#btn-import').attr('disabled', false);
                     } else {
                         printErrorMsg(response.error);

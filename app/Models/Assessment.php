@@ -26,7 +26,7 @@ class Assessment extends Model
     public static function get_max_min($criterias)
     {
         $arr=[];
-        foreach ($criterias as $key => $criteria) {
+        foreach ($criterias as $criteria) {
             $decoded = json_decode($criteria->assessments,true);
             $arr[$criteria['id']] = [
                 'name'=>$criteria['name'],

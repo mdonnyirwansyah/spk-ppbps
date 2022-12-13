@@ -84,23 +84,25 @@ class CandidateController extends Controller
             'file' => 'required',
         ]);
 
-        $failed = [];
+        $errors = [];
+        $import = new CandidateImport($request->recruitment);
+        $file = $request->file('file');
 
         if ($validator->passes()) {
             try {
-                Excel::import(new CandidateImport($request->recruitment), $request->file('file'));
+                $import->import($file);
 
                 return response()->json(['success' => 'Data baru berhasil diimport!']);
             } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                 $failures = $e->failures();
                 foreach ($failures as $index => $failure) {
-                    $failed[$index] = [
+                    $errors[$index] = [
                         'row' => $failure->row(),
-                        'value' => $failure->values()[0],
-                        'error' => $failure->errors()
+                        'attribute' => intval($failure->attribute()) + 1,
+                        'error' => substr($failure->errors()[0], 1)
                     ];
                 }
-                return response()->json(['failed' => $failed]);
+                return response()->json(['failed' => $errors]);
             }
         }
 

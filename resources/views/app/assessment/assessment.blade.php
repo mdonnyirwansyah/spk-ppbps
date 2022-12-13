@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Filter Penilaian')
+@section('title', 'Penilaian')
 
 @push('javascript')
 <script>
@@ -43,23 +43,28 @@
 
 @section('content')
 <section class="section">
-    <div class="section-header">
-        <div class="section-header-back">
-            <a href="{{ route('assessment.index') }}" class="btn btn-icon">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-        </div>
-        <h1>Penilaian</h1>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active">
-                <a href="{{ route('dashboard') }}">Dashboard</a>
-            </div>
-            <div class="breadcrumb-item">
-                <a href="{{ route('assessment.index') }}">Filter Penilaian</a>
-            </div>
-            <div class="breadcrumb-item">Penilaian</div>
-        </div>
+  <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('assessment.index') }}" class="btn btn-icon">
+            <i class="fas fa-arrow-left"></i>
+        </a>
     </div>
+    <h1>Penilaian</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active">
+            <a href="{{ route('dashboard') }}">Dashboard</a>
+        </div>
+        <div class="breadcrumb-item">
+            <a href="{{ route('assessment.index') }}">Filter Penilaian</a>
+        </div>
+        <div class="breadcrumb-item">Penilaian</div>
+    </div>
+  </div>
+  @if ($message = Session::get('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ $message }}
+    </div>
+  @endif
   <div class="section-body">
     <div class="card">
       <div class="card-body">
