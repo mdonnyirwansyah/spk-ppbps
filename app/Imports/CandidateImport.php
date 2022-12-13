@@ -28,11 +28,11 @@ class CandidateImport implements ToCollection, WithValidation, SkipsOnError
     {
         foreach ($rows as $row)
         {
-            $slug = Str::slug($row[0]);
+            $slug = Str::slug($row[1]);
             $countSlug = Candidate::where('slug', $slug)->count();
 
             if ($countSlug >= 1) {
-                $slug = Str::slug($row[0].'-'.$countSlug);
+                $slug = Str::slug($row[1].'-'.$countSlug);
             }
 
             DB::transaction(function() use ($row, $slug) {
