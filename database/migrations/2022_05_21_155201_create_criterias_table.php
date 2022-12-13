@@ -15,7 +15,7 @@ class CreateCriteriasTable extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recruitment_id')->nullable()->references('id')->on('recruitments')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('recruitment_id')->nullable()->constrained('recruitments', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name', '128');
             $table->enum('type', ['Cost', 'Benefit']);
             $table->float('weight');
