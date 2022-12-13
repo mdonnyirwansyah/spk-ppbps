@@ -61,7 +61,7 @@ class CandidateImport implements ToCollection, WithValidation, SkipsOnError
     public function rules(): array
     {
         return [
-             '0' => Rule::unique('candidates', 'id'),
+             '0' => ['required', Rule::unique('candidates', 'id')],
              '1' => 'required'
         ];
     }
