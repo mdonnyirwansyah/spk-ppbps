@@ -15,7 +15,7 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recruitment_id')->nullable()->constrained('recruitments', 'id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('recruitment_id')->nullable()->references('id')->on('recruitments')->onUpdate('cascade')->onDelete('restrict');
             $table->string('name', '32');
             $table->enum('status', ['Lulus', 'Tidak Lulus'])->nullable();
             $table->string('slug', '128');

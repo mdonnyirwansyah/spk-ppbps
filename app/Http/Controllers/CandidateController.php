@@ -7,6 +7,7 @@ use App\Imports\CandidateImport;
 use App\Models\Candidate;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -204,12 +205,8 @@ class CandidateController extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
-    public function export()
+    public function download()
     {
-        $export = new CandidatesExport([
-            ['Id Kandidat (Wajib Angka Unik)', 'Nama Kandidat', 'Kriteria 1 Kandidat', 'Kriteria 2 Kandidat', 'Kriteria dst.']
-        ]);
-
-        return Excel::download($export, 'candidates.xlsx');
+        return Storage::download('public/import-candidates.xlsx');
     }
 }

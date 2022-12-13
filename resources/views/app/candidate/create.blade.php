@@ -89,7 +89,7 @@
                         <button id="collapse-import" class="btn btn-primary" data-toggle="collapse" data-target="#import" aria-expanded="false" aria-controls="import">
                             Import
                         </button>
-                        <a id="btn-excel" href="{{ route('candidate.export') }}" target="_blank" class="btn btn-success d-none ml-3">File Import</a>
+                        <a id="btn-excel" href="{{ route('candidate.download') }}" target="_blank" class="btn btn-success d-none ml-3">File Import</a>
                     </div>
                     <div class="card-body collapse" id="import">
                         <form id="form-import" method="POST" action="{{ route('candidate.import') }}" enctype="multipart/form-data" autocomplete="off">

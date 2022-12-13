@@ -15,7 +15,7 @@ class CreateSubCriteriasTable extends Migration
     {
         Schema::create('sub_criterias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('criteria_id')->nullable()->constrained('criterias', 'id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('criteria_id')->nullable()->references('id')->on('criterias')->onUpdate('cascade')->onDelete('restrict');
             $table->string('name', '32');
             $table->enum('rating', ['Sangat Tinggi', 'Tinggi', 'Cukup', 'Rendah', 'Sangat Rendah']);
             $table->float('weight');

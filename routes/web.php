@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('update-status/{candidate:slug}', [CandidateController::class, 'update_status'])->name('update-status');
         Route::delete('{candidate:slug}', [CandidateController::class, 'destroy'])->name('destroy');
         Route::post('get-all', [CandidateController::class, 'get_all'])->name('get-all');
-        Route::get('export', [CandidateController::class, 'export'])->name('export');
+        Route::get('download', [CandidateController::class, 'download'])->name('download');
     });
 
     Route::prefix('assessment')->name('assessment.')->group(function () {
