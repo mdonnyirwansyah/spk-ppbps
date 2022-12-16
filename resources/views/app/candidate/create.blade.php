@@ -84,7 +84,7 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="d-none card">
                     <div class="card-body d-flex justify-content-end">
                         <button id="collapse-import" class="btn btn-primary" data-toggle="collapse" data-target="#import" aria-expanded="false" aria-controls="import">
                             Import
