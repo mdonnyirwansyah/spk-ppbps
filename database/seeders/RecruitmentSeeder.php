@@ -16,9 +16,6 @@ class RecruitmentSeeder extends Seeder
     public function run()
     {
         $recruitment = collect([
-            'Petugas Sensus Ekonomi 2016',
-            'Petugas Pemetaan SP2020',
-            'Petugas Pemetaan Wilkerstat ST2023',
             'Petugas Pendata Lapangan SP2020 Lanjutan',
         ]);
 
