@@ -9,7 +9,7 @@
     </nav>
   </header>
 
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="height: 100rem">
     @include('partials.sidebar')
   </aside>
 

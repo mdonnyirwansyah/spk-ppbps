@@ -22,6 +22,7 @@
         $('#form-import').unbind().bind('submit', function (e) {
             e.preventDefault();
             $('#btn-import').attr('disabled', true);
+            $('#btn-import').html('Loading...');
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -38,6 +39,7 @@
                         $('#form-import').trigger("reset");
                         toastr.success(response.success, 'Pemberitahuan,');
                         $('#btn-import').attr('disabled', false);
+                        $('#btn-import').html('Import');
                     } else if(response.failed) {
                         $('#form-import').trigger("reset");
                         let errors = response.failed.map((error) => {
@@ -48,9 +50,11 @@
                         text.innerHTML = error;
                         swal({title : 'Pemberitahuan', content: text});
                         $('#btn-import').attr('disabled', false);
+                        $('#btn-import').html('Import');
                     } else {
                         printErrorMsg(response.error);
                         $('#btn-import').attr('disabled', false);
+                        $('#btn-import').html('Import');
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -84,7 +88,7 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
-                <div class="d-none card">
+                <div class="card">
                     <div class="card-body d-flex justify-content-end">
                         <button id="collapse-import" class="btn btn-primary" data-toggle="collapse" data-target="#import" aria-expanded="false" aria-controls="import">
                             Import
